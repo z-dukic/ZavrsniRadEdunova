@@ -13,7 +13,7 @@ public class Ulaz {
 			try {
 
 				broj = Integer.parseInt(scanner.nextLine());
-				if (broj < min || broj < max) {
+				if (broj < min || broj > max) {
 					System.out.println("Broj ne smije biti manji od: " + min + " ili veći od " + max);
 					continue;
 				}
@@ -32,7 +32,7 @@ public class Ulaz {
 
 		while (true) {
 			try {
-				izjava = scanner.nextLine();
+				izjava = scanner.nextLine().trim().toLowerCase();
 				if (izjava == "da" || izjava == "ne") {
 					System.out.println("Možete odgovoriti samo sa da ili ne");
 					continue;
