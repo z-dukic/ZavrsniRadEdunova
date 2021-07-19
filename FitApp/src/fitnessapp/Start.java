@@ -50,22 +50,21 @@ public class Start {
 		System.out.println("Dali želite izađi iz aplikacije? (Da/Ne)");
 
 		try {
-			while(true) {
-			String izlaz = scanner.nextLine().trim().toLowerCase();
-			 
-			if (izlaz.equals("da")) {
-				System.out.println("Hvala Vam. Dođite opet!");
-				break;
-			} else {
-				glavniIzbornik();
+			while (true) {
+				String izlaz = scanner.nextLine().trim().toLowerCase();
 
-			}
+				if (izlaz.equals("da")) {
+					System.out.println("Hvala Vam. Dođite opet!");
+					break;
+				} else {
+					glavniIzbornik();
+
+				}
 			}
 
 		} catch (Exception e) {
-			
+
 		}
-		
 
 	}
 
@@ -120,10 +119,21 @@ public class Start {
 	private void izbornikAktivnosti() {
 
 	}
-
+	
 	private void izbornikHrane() {
-		
-		switch(Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
+		System.out.println("-------------");
+		System.out.println("1. Pregled po danima");
+		System.out.println("2. Dodaj hranu u dnevnik");
+		System.out.println("3. Brisadnje hrane");
+		System.out.println("4. Dodajte hrane u bazu");
+		System.out.println("5. Povratak na glavni izbornik");
+		akcijaIzbornikHrane();
+	}
+	
+	
+	private void akcijaIzbornikHrane() {
+
+		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
 		case 1 -> pregledPoDatumu();
 		case 2 -> unosHrane();
 		case 3 -> brisanjeHrane();
@@ -133,24 +143,36 @@ public class Start {
 
 	}
 
-	private Object dodavanjeHraneUBazu() {
-		// TODO Auto-generated method stub
-		return null;
+	private void dodavanjeHraneUBazu() {
+
+		Hrana h = new Hrana();
+		h = hranaPostaviVrijednost(h);
+		hrana.add(h);
+		akcijaIzbornikHrane();
+		izbornikHrane();
+
 	}
 
-	private Object brisanjeHrane() {
-		// TODO Auto-generated method stub
-		return null;
+	private Hrana hranaPostaviVrijednost(Hrana h) {
+		h.setImeHrane(Ulaz.ucitajString("Kako se hrana zove", "Niste unijeli ime hrane"));
+		h.setKalorije(Ulaz.ucitajInt("Koliko ima kalorija na 100 grama?", "Niste unijeli dobar broj", 0, 910));
+		h.setProteini(Ulaz.ucitajInt("Koliko proteina ima na 100g?", "Niste unijeli dobar broj", 0, 410));
+		h.setUgljikohidrati(Ulaz.ucitajInt("Koliko ugljikohidrata ima na 100g?", "Niste unijeli dobar broj", 0, 410));
+		h.setMasti(Ulaz.ucitajInt("Koliko ima masti na 100 grama?", "Niste unijeli dobar broj", 0, 910));
+
+		return h;
 	}
 
-	private Object unosHrane() {
-		// TODO Auto-generated method stub
-		return null;
+	private void brisanjeHrane() {
+
 	}
 
-	private Object pregledPoDatumu() {
-		// TODO Auto-generated method stub
-		return null;
+	private void unosHrane() {
+
+	}
+
+	private void pregledPoDatumu() {
+
 	}
 
 	private void dnevnikIzbornik() {

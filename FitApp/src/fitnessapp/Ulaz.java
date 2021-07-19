@@ -46,5 +46,21 @@ public class Ulaz {
 
 		return izjava;
 	}
+	
+	public static String ucitajString (String poruka, String greska) {
+		String string = "";
+		while(true) {
+			System.out.println(poruka);
+			string= scanner.nextLine();
+			if(string.trim().equals("")) {
+				System.out.println(greska);
+				continue;
+			}
+			break;
+		}
+		
+		
+		return string;
+	}
 
 }
