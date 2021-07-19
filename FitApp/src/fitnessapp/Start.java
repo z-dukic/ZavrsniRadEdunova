@@ -40,7 +40,7 @@ public class Start {
 		case 4 -> postavkeIzbornik();
 		case 5 -> oNamaIzbornik();
 		case 6 -> izlazIzAplikacije();
-		
+
 		}
 
 	}
@@ -50,17 +50,22 @@ public class Start {
 		System.out.println("Dali želite izađi iz aplikacije? (Da/Ne)");
 
 		try {
-			String izlaz = "";
-			izlaz = scanner.nextLine().trim().toLowerCase();
-			if (izlaz == "da") {
+			while(true) {
+			String izlaz = scanner.nextLine().trim().toLowerCase();
+			 
+			if (izlaz.equals("da")) {
 				System.out.println("Hvala Vam. Dođite opet!");
-				if (izlaz == "ne") {
-					glavniIzbornik();
-				}
+				break;
+			} else {
+				glavniIzbornik();
+
 			}
+			}
+
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
+		
 
 	}
 
@@ -98,32 +103,54 @@ public class Start {
 	private void postavkeIzbornik() {
 		System.out.println("Dali imate kreiran račun? (Da/Ne)");
 		String test = scanner.nextLine();
-		try { 
-			if(test.trim().toLowerCase()== "da"){
+		try {
+			if (test.trim().toLowerCase() == "da") {
 				// ovdje treba pokazati izbornik sa svim korisnicima
-			}else {
-				if(test.trim().toLowerCase()== "ne") {
-					System.out.println("testing");
-				}
-			}
-			
-		} catch (Exception e) {
-			
-		}
-		
-			
-		}
-		
-		
+			} else if (test.trim().toLowerCase() == "ne") {
+				// Kreiraj račun
 
-	
+			}
+
+		} catch (Exception e) {
+			System.out.println("Niste dobro unijeli broj");
+		}
+
+	}
 
 	private void izbornikAktivnosti() {
 
 	}
 
 	private void izbornikHrane() {
+		
+		switch(Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
+		case 1 -> pregledPoDatumu();
+		case 2 -> unosHrane();
+		case 3 -> brisanjeHrane();
+		case 4 -> dodavanjeHraneUBazu();
+		case 5 -> glavniIzbornik();
+		}
 
+	}
+
+	private Object dodavanjeHraneUBazu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Object brisanjeHrane() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Object unosHrane() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Object pregledPoDatumu() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private void dnevnikIzbornik() {
