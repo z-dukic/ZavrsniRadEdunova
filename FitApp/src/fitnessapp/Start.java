@@ -151,72 +151,82 @@ public class Start {
 
 		Hrana mrkva = new Hrana();
 		mrkva.setImeHrane("Mrkva");
-		mrkva.setProteini(10);
-		mrkva.setUgljikohidrati(10);
-		mrkva.setMasti(10);
+		mrkva.setKalorije(35);
+		mrkva.setProteini(0);
+		mrkva.setUgljikohidrati(8);
+		mrkva.setMasti(0);
 		hrana.add(mrkva);
 
 		Hrana jabuka = new Hrana();
-		jabuka.setImeHrane(null);
+		jabuka.setImeHrane("Jabuka");
+		jabuka.setKalorije(48);
 		jabuka.setProteini(0);
-		jabuka.setUgljikohidrati(0);
+		jabuka.setUgljikohidrati(13);
 		jabuka.setMasti(0);
 		hrana.add(jabuka);
 
 		Hrana banana = new Hrana();
-		banana.setImeHrane(null);
+		banana.setImeHrane("Banana");
+		banana.setKalorije(89);
 		banana.setProteini(0);
-		banana.setUgljikohidrati(0);
+		banana.setUgljikohidrati(23);
 		banana.setMasti(0);
 		hrana.add(banana);
 
 		Hrana breskva = new Hrana();
-		breskva.setImeHrane(null);
-		breskva.setProteini(0);
+		breskva.setImeHrane("Breskva");
+		breskva.setKalorije(39);
+		breskva.setProteini(10);
 		breskva.setUgljikohidrati(0);
 		breskva.setMasti(0);
 		hrana.add(breskva);
 
 		Hrana luk = new Hrana();
-		luk.setImeHrane(null);
+		luk.setImeHrane("Luk");
+		luk.setKalorije(40);
 		luk.setProteini(0);
-		luk.setUgljikohidrati(0);
+		luk.setUgljikohidrati(10);
 		luk.setMasti(0);
 		hrana.add(luk);
 
 		Hrana cocaCola = new Hrana();
-		cocaCola.setImeHrane(null);
+		cocaCola.setImeHrane("Coca-cola");
+		cocaCola.setKalorije(41);
 		cocaCola.setProteini(0);
-		cocaCola.setUgljikohidrati(0);
+		cocaCola.setUgljikohidrati(10);
 		cocaCola.setMasti(0);
 		hrana.add(cocaCola);
 
 		Hrana cips = new Hrana();
-		cips.setImeHrane(null);
-		cips.setProteini(0);
-		cocaCola.setUgljikohidrati(0);
-		cips.setMasti(0);
+		cips.setImeHrane("Čips");
+		cips.setKalorije(547);
+		cips.setProteini(7);
+		cips.setUgljikohidrati(50);
+		cips.setMasti(37);
 		hrana.add(cips);
 
 		Hrana bigMac = new Hrana();
-		bigMac.setImeHrane(null);
-		bigMac.setProteini(0);
-		bigMac.setUgljikohidrati(0);
-		bigMac.setMasti(0);
+		bigMac.setImeHrane("Big Mac");
+		bigMac.setKalorije(257);
+		bigMac.setProteini(12);
+		bigMac.setUgljikohidrati(20);
+		bigMac.setMasti(15);
 		hrana.add(bigMac);
 
-		Hrana cobanac = new Hrana();
-		cobanac.setImeHrane(null);
-		cobanac.setProteini(0);
-		cobanac.setUgljikohidrati(0);
-		cobanac.setMasti(0);
-		hrana.add(cobanac);
+		Hrana bolognese = new Hrana();
+		bolognese.setImeHrane("Špagete Bolognese");
+		bolognese.setKalorije(113);
+		bolognese.setProteini(7);
+		bolognese.setUgljikohidrati(9);
+		bolognese.setMasti(7);
+		hrana.add(bolognese);
 
 		Hrana sir = new Hrana();
-		sir.setImeHrane(null);
-		sir.setProteini(0);
-		sir.setUgljikohidrati(0);
-		sir.setMasti(0);
+		sir.setImeHrane("Sir gauda");
+		sir.setKalorije(356);
+		sir.setProteini(25);
+		sir.setUgljikohidrati(2);
+		sir.setMasti(27);
 		hrana.add(sir);
 
 		izbornikHrane();
