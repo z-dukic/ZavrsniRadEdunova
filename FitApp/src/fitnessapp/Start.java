@@ -14,6 +14,7 @@ public class Start {
 	private List<Korisnik> korisnik;
 
 	public Start() {
+		hrana = new ArrayList<Hrana>();
 		korisnik = new ArrayList<Korisnik>();
 		glavniIzbornik();
 
@@ -148,7 +149,6 @@ public class Start {
 		Hrana h = new Hrana();
 		h = hranaPostaviVrijednost(h);
 		hrana.add(h);
-		akcijaIzbornikHrane();
 		izbornikHrane();
 
 	}
@@ -156,10 +156,10 @@ public class Start {
 	private Hrana hranaPostaviVrijednost(Hrana h) {
 		h.setImeHrane(Ulaz.ucitajString("Kako se hrana zove", "Niste unijeli ime hrane"));
 		h.setKalorije(Ulaz.ucitajInt("Koliko ima kalorija na 100 grama?", "Niste unijeli dobar broj", 0, 910));
-		h.setProteini(Ulaz.ucitajInt("Koliko proteina ima na 100g?", "Niste unijeli dobar broj", 0, 410));
-		h.setUgljikohidrati(Ulaz.ucitajInt("Koliko ugljikohidrata ima na 100g?", "Niste unijeli dobar broj", 0, 410));
-		h.setMasti(Ulaz.ucitajInt("Koliko ima masti na 100 grama?", "Niste unijeli dobar broj", 0, 910));
-
+		h.setProteini(Ulaz.ucitajInt("Koliko proteina ima na 100g?", "Niste unijeli dobar broj", 0, 100));
+		h.setUgljikohidrati(Ulaz.ucitajInt("Koliko ugljikohidrata ima na 100g?", "Niste unijeli dobar broj", 0, 100));
+		h.setMasti(Ulaz.ucitajInt("Koliko ima masti na 100 grama?", "Niste unijeli dobar broj", 0, 100));
+		
 		return h;
 	}
 
@@ -172,7 +172,23 @@ public class Start {
 	}
 
 	private void pregledPoDatumu() {
+		hranaStavke("Pregled unesene hrane");
+		System.out.println("--------------");
+		if(hrana.size()==0) {
+			System.out.println("Nema unesene hrane");
+		}else {
+			Hrana h;
+			for (int i=0; i<hrana.size(); i++) {
+				h=hrana.get(i);
+				System.out.println((i+1) + ". " + h.getImeHrane());
+			}
+		}
 
+	}
+
+	private void hranaStavke(String naslov) {
+		
+		
 	}
 
 	private void dnevnikIzbornik() {
