@@ -16,7 +16,7 @@ public class Start {
 	public Start() {
 		hrana = new ArrayList<Hrana>();
 		bazaHrane();
-		
+
 		aktivnosti = new ArrayList<Aktivnosti>();
 		bazaAktivnosti();
 
@@ -29,24 +29,23 @@ public class Start {
 		Aktivnosti trcanje = new Aktivnosti();
 		trcanje.setImeAktivnosti("Trcanje");
 		trcanje.setPotroseneKalorijePoSatu(600);
-		
+
 		Aktivnosti nogomet = new Aktivnosti();
 		nogomet.setImeAktivnosti("Nogomet");
 		nogomet.setPotroseneKalorijePoSatu(500);
-		
+
 		Aktivnosti skijanje = new Aktivnosti();
 		skijanje.setImeAktivnosti("Skijanje");
 		skijanje.setPotroseneKalorijePoSatu(350);
-		
+
 		Aktivnosti bicikliranje = new Aktivnosti();
 		bicikliranje.setImeAktivnosti("Bicikliranje");
 		bicikliranje.setPotroseneKalorijePoSatu(300);
-		
+
 		Aktivnosti rukomet = new Aktivnosti();
 		rukomet.setImeAktivnosti("Rukomet");
 		rukomet.setVrijemeTrajanjaUMinutama(450);
-		
-		
+
 	}
 
 	private void bazaHrane() {
@@ -230,6 +229,52 @@ public class Start {
 	}
 
 	private void izbornikAktivnosti() {
+		System.out.println("-----------");
+		System.out.println("1. Pregledavanje baze aktivnosti");
+		System.out.println("2. Dodavanje aktivnosti u bazu");
+		System.out.println("3. Brisanje aktivnosti iz baze");
+		System.out.println("4. Povratak na glavni izbornik");
+		akcijaIzbornikAktivnosti();
+	}
+
+	private void akcijaIzbornikAktivnosti() {
+		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 4)) {
+		case 1 -> pregledBazeAktivnosti();
+		case 2 -> dodavanjeAktivnostiUBazu();
+		case 3 -> brisanjeAktivnostiIzBaze();
+		case 4 -> glavniIzbornik();
+		}
+
+	}
+
+	private void brisanjeAktivnostiIzBaze() {
+
+	}
+
+	private void dodavanjeAktivnostiUBazu() {
+
+	}
+
+	private void pregledBazeAktivnosti() {
+		aktivnostiStavke("Pregled unesenih aktivnosti");
+		System.out.println("-----------");
+
+		if (aktivnosti.size() == 0) {
+			System.out.println("Nema unesenih aktivnosti");
+		} else {
+			Aktivnosti a;
+
+			for (int i = 0; i < aktivnosti.size(); i++) {
+				System.out.println((i + 1) + ". " + a.getImeAktivnosti());
+			}
+
+		}
+
+	}
+
+	private String aktivnostiStavke(String poruka) {
+
+		return poruka;
 
 	}
 
@@ -244,12 +289,12 @@ public class Start {
 
 	private void akcijaIzbornikHrane() {
 
-		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
+		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 4)) {
 		case 1 -> pregledBazeHrane();
 		case 2 -> dodavanjeHraneUBazu();
 		case 3 -> brisanjeHraneIzBaze();
 		case 4 -> glavniIzbornik();
-		
+
 		}
 
 	}
