@@ -15,8 +15,93 @@ public class Start {
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
+		bazaHrane();
+
 		korisnik = new ArrayList<Korisnik>();
 		glavniIzbornik();
+
+	}
+
+	private void bazaHrane() {
+		Hrana mrkva = new Hrana();
+		mrkva.setImeHrane("Mrkva");
+		mrkva.setKalorije(35);
+		mrkva.setProteini(0);
+		mrkva.setUgljikohidrati(8);
+		mrkva.setMasti(0);
+		hrana.add(mrkva);
+
+		Hrana jabuka = new Hrana();
+		jabuka.setImeHrane("Jabuka");
+		jabuka.setKalorije(48);
+		jabuka.setProteini(0);
+		jabuka.setUgljikohidrati(13);
+		jabuka.setMasti(0);
+		hrana.add(jabuka);
+
+		Hrana banana = new Hrana();
+		banana.setImeHrane("Banana");
+		banana.setKalorije(89);
+		banana.setProteini(0);
+		banana.setUgljikohidrati(23);
+		banana.setMasti(0);
+		hrana.add(banana);
+
+		Hrana breskva = new Hrana();
+		breskva.setImeHrane("Breskva");
+		breskva.setKalorije(39);
+		breskva.setProteini(10);
+		breskva.setUgljikohidrati(0);
+		breskva.setMasti(0);
+		hrana.add(breskva);
+
+		Hrana luk = new Hrana();
+		luk.setImeHrane("Luk");
+		luk.setKalorije(40);
+		luk.setProteini(0);
+		luk.setUgljikohidrati(10);
+		luk.setMasti(0);
+		hrana.add(luk);
+
+		Hrana cocaCola = new Hrana();
+		cocaCola.setImeHrane("Coca-cola");
+		cocaCola.setKalorije(41);
+		cocaCola.setProteini(0);
+		cocaCola.setUgljikohidrati(10);
+		cocaCola.setMasti(0);
+		hrana.add(cocaCola);
+
+		Hrana cips = new Hrana();
+		cips.setImeHrane("Čips");
+		cips.setKalorije(547);
+		cips.setProteini(7);
+		cips.setUgljikohidrati(50);
+		cips.setMasti(37);
+		hrana.add(cips);
+
+		Hrana bigMac = new Hrana();
+		bigMac.setImeHrane("Big Mac");
+		bigMac.setKalorije(257);
+		bigMac.setProteini(12);
+		bigMac.setUgljikohidrati(20);
+		bigMac.setMasti(15);
+		hrana.add(bigMac);
+
+		Hrana bolognese = new Hrana();
+		bolognese.setImeHrane("Špagete Bolognese");
+		bolognese.setKalorije(113);
+		bolognese.setProteini(7);
+		bolognese.setUgljikohidrati(9);
+		bolognese.setMasti(7);
+		hrana.add(bolognese);
+
+		Hrana sir = new Hrana();
+		sir.setImeHrane("Sir gauda");
+		sir.setKalorije(356);
+		sir.setProteini(25);
+		sir.setUgljikohidrati(2);
+		sir.setMasti(27);
+		hrana.add(sir);
 
 	}
 
@@ -24,8 +109,8 @@ public class Start {
 		System.out.println("****FitApp****");
 		System.out.println("Izbornik");
 		System.out.println("1. Dnevnik");
-		System.out.println("2. Unos hrane");
-		System.out.println("3. Unos aktivnosti");
+		System.out.println("2. Unos hrane u bazu");
+		System.out.println("3. Unos aktivnosti u bazu");
 		System.out.println("4. Postavke korisnika");
 		System.out.println("5. O nama");
 		System.out.println("6. Izlazak iz aplikacije");
@@ -123,22 +208,21 @@ public class Start {
 
 	private void izbornikHrane() {
 		System.out.println("-------------");
-		System.out.println("1. Pregled po danima");
-		System.out.println("2. Dodaj hranu u dnevnik");
-		System.out.println("3. Brisanje hrane");
-		System.out.println("4. Dodajte hrane u bazu");
-		System.out.println("5. Povratak na glavni izbornik");
+		System.out.println("1. Pregled baze hrane");
+		System.out.println("2. Dodavanje hrane u bazu");
+		System.out.println("3. Brisanje hrane iz baze");
+		System.out.println("4. Povratak na glavni izbornik");
 		akcijaIzbornikHrane();
 	}
 
 	private void akcijaIzbornikHrane() {
 
 		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
-		case 1 -> pregledPoDatumu();
-		case 2 -> unosHrane();
-		case 3 -> brisanjeHrane();
-		case 4 -> dodavanjeHraneUBazu();
-		case 5 -> glavniIzbornik();
+		case 1 -> pregledBazeHrane();
+		case 2 -> dodavanjeHraneUBazu();
+		case 3 -> brisanjeHraneIzBaze();
+		case 4 -> glavniIzbornik();
+		
 		}
 
 	}
@@ -149,91 +233,12 @@ public class Start {
 		h = hranaPostaviVrijednost(h);
 		hrana.add(h);
 
-		Hrana mrkva = new Hrana();
-		mrkva.setImeHrane("Mrkva");
-		mrkva.setKalorije(35);
-		mrkva.setProteini(0);
-		mrkva.setUgljikohidrati(8);
-		mrkva.setMasti(0);
-		hrana.add(mrkva);
-
-		Hrana jabuka = new Hrana();
-		jabuka.setImeHrane("Jabuka");
-		jabuka.setKalorije(48);
-		jabuka.setProteini(0);
-		jabuka.setUgljikohidrati(13);
-		jabuka.setMasti(0);
-		hrana.add(jabuka);
-
-		Hrana banana = new Hrana();
-		banana.setImeHrane("Banana");
-		banana.setKalorije(89);
-		banana.setProteini(0);
-		banana.setUgljikohidrati(23);
-		banana.setMasti(0);
-		hrana.add(banana);
-
-		Hrana breskva = new Hrana();
-		breskva.setImeHrane("Breskva");
-		breskva.setKalorije(39);
-		breskva.setProteini(10);
-		breskva.setUgljikohidrati(0);
-		breskva.setMasti(0);
-		hrana.add(breskva);
-
-		Hrana luk = new Hrana();
-		luk.setImeHrane("Luk");
-		luk.setKalorije(40);
-		luk.setProteini(0);
-		luk.setUgljikohidrati(10);
-		luk.setMasti(0);
-		hrana.add(luk);
-
-		Hrana cocaCola = new Hrana();
-		cocaCola.setImeHrane("Coca-cola");
-		cocaCola.setKalorije(41);
-		cocaCola.setProteini(0);
-		cocaCola.setUgljikohidrati(10);
-		cocaCola.setMasti(0);
-		hrana.add(cocaCola);
-
-		Hrana cips = new Hrana();
-		cips.setImeHrane("Čips");
-		cips.setKalorije(547);
-		cips.setProteini(7);
-		cips.setUgljikohidrati(50);
-		cips.setMasti(37);
-		hrana.add(cips);
-
-		Hrana bigMac = new Hrana();
-		bigMac.setImeHrane("Big Mac");
-		bigMac.setKalorije(257);
-		bigMac.setProteini(12);
-		bigMac.setUgljikohidrati(20);
-		bigMac.setMasti(15);
-		hrana.add(bigMac);
-
-		Hrana bolognese = new Hrana();
-		bolognese.setImeHrane("Špagete Bolognese");
-		bolognese.setKalorije(113);
-		bolognese.setProteini(7);
-		bolognese.setUgljikohidrati(9);
-		bolognese.setMasti(7);
-		hrana.add(bolognese);
-
-		Hrana sir = new Hrana();
-		sir.setImeHrane("Sir gauda");
-		sir.setKalorije(356);
-		sir.setProteini(25);
-		sir.setUgljikohidrati(2);
-		sir.setMasti(27);
-		hrana.add(sir);
-
 		izbornikHrane();
 
 	}
 
 	private Hrana hranaPostaviVrijednost(Hrana h) {
+
 		h.setImeHrane(Ulaz.ucitajString("Kako se hrana zove", "Niste unijeli ime hrane"));
 		h.setKalorije(Ulaz.ucitajInt("Koliko ima kalorija na 100 grama?", "Niste unijeli dobar broj", 0, 910));
 		h.setProteini(Ulaz.ucitajInt("Koliko proteina ima na 100g?", "Niste unijeli dobar broj", 0, 100));
@@ -243,7 +248,7 @@ public class Start {
 		return h;
 	}
 
-	private void brisanjeHrane() {
+	private void brisanjeHraneIzBaze() {
 
 	}
 
@@ -251,18 +256,25 @@ public class Start {
 
 	}
 
-	private void pregledPoDatumu() {
+	private void pregledBazeHrane() {
 		hranaStavke("Pregled unesene hrane");
 		System.out.println("--------------");
+
 		if (hrana.size() == 0) {
+
 			System.out.println("Nema unesene hrane");
 		} else {
+
 			Hrana h;
+
 			for (int i = 0; i < hrana.size(); i++) {
 				h = hrana.get(i);
+
 				System.out.println((i + 1) + ". " + h.getImeHrane());
 			}
 		}
+		izbornikHrane();
+		akcijaIzbornikHrane();
 
 	}
 
