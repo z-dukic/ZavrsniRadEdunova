@@ -16,10 +16,37 @@ public class Start {
 	public Start() {
 		hrana = new ArrayList<Hrana>();
 		bazaHrane();
+		
+		aktivnosti = new ArrayList<Aktivnosti>();
+		bazaAktivnosti();
 
 		korisnik = new ArrayList<Korisnik>();
 		glavniIzbornik();
 
+	}
+
+	private void bazaAktivnosti() {
+		Aktivnosti trcanje = new Aktivnosti();
+		trcanje.setImeAktivnosti("Trcanje");
+		trcanje.setPotroseneKalorijePoSatu(600);
+		
+		Aktivnosti nogomet = new Aktivnosti();
+		nogomet.setImeAktivnosti("Nogomet");
+		nogomet.setPotroseneKalorijePoSatu(500);
+		
+		Aktivnosti skijanje = new Aktivnosti();
+		skijanje.setImeAktivnosti("Skijanje");
+		skijanje.setPotroseneKalorijePoSatu(350);
+		
+		Aktivnosti bicikliranje = new Aktivnosti();
+		bicikliranje.setImeAktivnosti("Bicikliranje");
+		bicikliranje.setPotroseneKalorijePoSatu(300);
+		
+		Aktivnosti rukomet = new Aktivnosti();
+		rukomet.setImeAktivnosti("Rukomet");
+		rukomet.setVrijemeTrajanjaUMinutama(450);
+		
+		
 	}
 
 	private void bazaHrane() {
