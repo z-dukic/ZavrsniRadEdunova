@@ -253,7 +253,10 @@ public class Start {
 	}
 
 	private void brisanjeAktivnostiIzBaze() {
-
+		aktivnostiStavke("Pregled unesenih aktivnosti");
+		int brojAktivnosti = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1, aktivnosti.size());
+		aktivnosti.remove(brojAktivnosti-1);
+		izbornikAktivnosti();
 	}
 
 	private void dodavanjeAktivnostiUBazu() {
@@ -288,6 +291,8 @@ public class Start {
 			}
 
 		}
+		izbornikAktivnosti();
+		akcijaIzbornikAktivnosti();
 
 	}
 
@@ -340,7 +345,10 @@ public class Start {
 	}
 
 	private void brisanjeHraneIzBaze() {
-
+		hranaStavke("Trenutno dostupno u aplikaciji");
+		int brojHrane = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1, hrana.size());
+		hrana.remove(brojHrane-1);
+		izbornikHrane();
 	}
 
 	private void unosHrane() {
