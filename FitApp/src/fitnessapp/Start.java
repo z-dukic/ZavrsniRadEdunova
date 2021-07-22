@@ -29,22 +29,27 @@ public class Start {
 		Aktivnosti trcanje = new Aktivnosti();
 		trcanje.setImeAktivnosti("Trcanje");
 		trcanje.setPotroseneKalorijePoSatu(600);
+		aktivnosti.add(trcanje);
 
 		Aktivnosti nogomet = new Aktivnosti();
 		nogomet.setImeAktivnosti("Nogomet");
 		nogomet.setPotroseneKalorijePoSatu(500);
+		aktivnosti.add(nogomet);
 
 		Aktivnosti skijanje = new Aktivnosti();
 		skijanje.setImeAktivnosti("Skijanje");
 		skijanje.setPotroseneKalorijePoSatu(350);
+		aktivnosti.add(skijanje);
 
 		Aktivnosti bicikliranje = new Aktivnosti();
 		bicikliranje.setImeAktivnosti("Bicikliranje");
 		bicikliranje.setPotroseneKalorijePoSatu(300);
+		aktivnosti.add(bicikliranje);
 
 		Aktivnosti rukomet = new Aktivnosti();
 		rukomet.setImeAktivnosti("Rukomet");
 		rukomet.setVrijemeTrajanjaUMinutama(450);
+		aktivnosti.add(rukomet);
 
 	}
 
@@ -253,6 +258,19 @@ public class Start {
 
 	private void dodavanjeAktivnostiUBazu() {
 
+		Aktivnosti a = new Aktivnosti();
+		a = aktivnostiPostaviVrijednosti(a);
+		aktivnosti.add(a);
+
+		izbornikAktivnosti();
+
+	}
+
+	private Aktivnosti aktivnostiPostaviVrijednosti(Aktivnosti a) {
+		a.setImeAktivnosti(Ulaz.ucitajString("Unesite ime aktivnosti", "Niste unijeli ime aktivnosti"));
+		a.setPotroseneKalorijePoSatu(
+				Ulaz.ucitajInt("Unesite potrosene kalorije u sat vremena", "Niste dali cijeli broj", 0, 999));
+		return a;
 	}
 
 	private void pregledBazeAktivnosti() {
@@ -265,6 +283,7 @@ public class Start {
 			Aktivnosti a;
 
 			for (int i = 0; i < aktivnosti.size(); i++) {
+				a = aktivnosti.get(i);
 				System.out.println((i + 1) + ". " + a.getImeAktivnosti());
 			}
 
