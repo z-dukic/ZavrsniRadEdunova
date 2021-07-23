@@ -21,7 +21,11 @@ public class Start {
 		bazaAktivnosti();
 
 		korisnik = new ArrayList<Korisnik>();
-		glavniIzbornik();
+		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
+		// Ovo je da ne moraš svaki put pravit račun
+		postavkeIzbornik();
+
+		// glavniIzbornik();
 
 	}
 
@@ -220,16 +224,31 @@ public class Start {
 		System.out.println("Dali imate kreiran račun? (Da/Ne)");
 		String test = scanner.nextLine();
 		try {
+
 			if (test.trim().toLowerCase() == "da") {
 				// ovdje treba pokazati izbornik sa svim korisnicima
-			} else if (test.trim().toLowerCase() == "ne") {
-				// Kreiraj račun
+			} else {
+				System.out.println("Dali želite kreirati račun?");
+				{
+					kreirajRacun();
+				}
 
 			}
 
 		} catch (Exception e) {
 			System.out.println("Niste dobro unijeli broj");
 		}
+
+	}
+
+	private void kreirajRacun() {
+		Korisnik noviKorisnik = new Korisnik();
+		noviKorisnik.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+		noviKorisnik.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
+		noviKorisnik.setSpol(Ulaz.ucitajInt(null, null, 0, 0); // Napravit novu metodu za unos spola
+		noviKorisnik.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima", "Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
+		noviKorisnik.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima", "Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+		
 
 	}
 
@@ -254,8 +273,9 @@ public class Start {
 
 	private void brisanjeAktivnostiIzBaze() {
 		aktivnostiStavke("Pregled unesenih aktivnosti");
-		int brojAktivnosti = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1, aktivnosti.size());
-		aktivnosti.remove(brojAktivnosti-1);
+		int brojAktivnosti = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1,
+				aktivnosti.size());
+		aktivnosti.remove(brojAktivnosti - 1);
 		izbornikAktivnosti();
 	}
 
@@ -346,13 +366,10 @@ public class Start {
 
 	private void brisanjeHraneIzBaze() {
 		hranaStavke("Trenutno dostupno u aplikaciji");
-		int brojHrane = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1, hrana.size());
-		hrana.remove(brojHrane-1);
+		int brojHrane = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1,
+				hrana.size());
+		hrana.remove(brojHrane - 1);
 		izbornikHrane();
-	}
-
-	private void unosHrane() {
-
 	}
 
 	private void pregledBazeHrane() {

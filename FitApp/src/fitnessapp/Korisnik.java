@@ -5,8 +5,24 @@ public class Korisnik {
 	private int sifra;
 	private String nadimak;
 	private int visina;
-	private String tezina;
-	private boolean spol;
+	private int tezina;
+	public int getTezina() {
+		return tezina;
+	}
+
+	public void setTezina(int tezina) {
+		this.tezina = tezina;
+	}
+
+	private String spol;
+
+	public String getSpol() {
+		return spol;
+	}
+
+	public void setSpol(String spol) {
+		this.spol = spol;
+	}
 
 	public int getSifra() {
 		return sifra;
@@ -32,21 +48,9 @@ public class Korisnik {
 		this.visina = visina;
 	}
 
-	public String getTezina() {
-		return tezina;
-	}
 
-	public void setTezina(String tezina) {
-		this.tezina = tezina;
-	}
 
-	public boolean isSpol() {
-		return spol;
-	}
 
-	public void setSpol(boolean spol) {
-		this.spol = spol;
-	}
 
 	public int getDob() {
 		return dob;
