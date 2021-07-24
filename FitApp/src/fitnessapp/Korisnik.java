@@ -6,6 +6,7 @@ public class Korisnik {
 	private String nadimak;
 	private int visina;
 	private int tezina;
+
 	public int getTezina() {
 		return tezina;
 	}
@@ -47,10 +48,6 @@ public class Korisnik {
 	public void setVisina(int visina) {
 		this.visina = visina;
 	}
-
-
-
-
 
 	public int getDob() {
 		return dob;

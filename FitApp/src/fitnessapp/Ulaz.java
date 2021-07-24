@@ -6,6 +6,26 @@ public class Ulaz {
 
 	public static Scanner scanner = new Scanner(System.in);
 
+	public static String ucitajSpol(String poruka, String greska ) {
+		String spolString = "";
+		
+		while(true) {
+			System.out.println(poruka);
+			try {
+				spolString = scanner.nextLine().trim().toLowerCase();
+				if(spolString.equals("M") || spolString.equals("F")) {
+					System.out.println("Možete odgovoriti samo sa M(Muško) ili F(Žensko)");
+					continue;
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println(greska);
+			}
+		}
+
+		return spolString;
+	}
+
 	public static int ucitajInt(String poruka, String greska, int min, int max) {
 		int broj = 0;
 		while (true) {
@@ -46,20 +66,19 @@ public class Ulaz {
 
 		return izjava;
 	}
-	
-	public static String ucitajString (String poruka, String greska) {
+
+	public static String ucitajString(String poruka, String greska) {
 		String string = "";
-		while(true) {
+		while (true) {
 			System.out.println(poruka);
-			string= scanner.nextLine();
-			if(string.trim().equals("")) {
+			string = scanner.nextLine();
+			if (string.trim().equals("")) {
 				System.out.println(greska);
 				continue;
 			}
 			break;
 		}
-		
-		
+
 		return string;
 	}
 

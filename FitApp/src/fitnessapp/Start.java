@@ -23,9 +23,9 @@ public class Start {
 		korisnik = new ArrayList<Korisnik>();
 		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
 		// Ovo je da ne moraš svaki put pravit račun
-		postavkeIzbornik();
+		// postavkeIzbornik();
 
-		// glavniIzbornik();
+		glavniIzbornik();
 
 	}
 
@@ -223,15 +223,17 @@ public class Start {
 	private void postavkeIzbornik() {
 		System.out.println("Dali imate kreiran račun? (Da/Ne)");
 		String test = scanner.nextLine();
+		
 		try {
 
 			if (test.trim().toLowerCase() == "da") {
 				// ovdje treba pokazati izbornik sa svim korisnicima
 			} else {
-				System.out.println("Dali želite kreirati račun?");
-				{
+				System.out.println("Da bi nastavili morate kreirati račun");
+				
 					kreirajRacun();
-				}
+				
+				
 
 			}
 
@@ -243,11 +245,16 @@ public class Start {
 
 	private void kreirajRacun() {
 		Korisnik noviKorisnik = new Korisnik();
-		noviKorisnik.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+		noviKorisnik
+				.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
 		noviKorisnik.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
-		noviKorisnik.setSpol(Ulaz.ucitajInt(null, null, 0, 0); // Napravit novu metodu za unos spola
-		noviKorisnik.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima", "Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
-		noviKorisnik.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima", "Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+		noviKorisnik.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)", "Možete samo unijeti M za muško i F za žensko"));
+		noviKorisnik.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
+				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
+		noviKorisnik.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
+				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+		System.out.println(noviKorisnik.getNadimak() + " dobrodošli u FitApp. Uživajte u korištenju FitApp-a.");
+		glavniIzbornik();
 		
 
 	}
