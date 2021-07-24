@@ -23,7 +23,7 @@ public class Start {
 		korisnik = new ArrayList<Korisnik>();
 		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
 		// Ovo je da ne moraš svaki put pravit račun
-		// postavkeIzbornik();
+	 //	postavkeIzbornik();
 
 		glavniIzbornik();
 
@@ -137,6 +137,8 @@ public class Start {
 		sir.setUgljikohidrati(2);
 		sir.setMasti(27);
 		hrana.add(sir);
+		
+		
 
 	}
 
@@ -161,6 +163,8 @@ public class Start {
 		case 4 -> postavkeIzbornik();
 		case 5 -> oNamaIzbornik();
 		case 6 -> izlazIzAplikacije();
+		
+		
 
 		}
 
@@ -211,29 +215,29 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		System.out.println("Želite li se vratiti na glavni izbornik? (Da/Ne)");
-		if (scanner.nextLine().trim().toLowerCase() == "da") {
+		
+		System.out.println("--------");
+		System.out.println("Vraćamo Vas na glavni izbornik");
+		System.out.println("--------");
+		
 			glavniIzbornik();
-		} else {
-			System.out.println("Hvala Vam. Dođite opet!");
-		}
+		
 	}
 
 	private void postavkeIzbornik() {
 		System.out.println("Dali imate kreiran račun? (Da/Ne)");
-		String test = scanner.nextLine();
 		
-		try {
 
-			if (test.trim().toLowerCase() == "da") {
-				// ovdje treba pokazati izbornik sa svim korisnicima
-			} else {
+		try {
+			String test = scanner.nextLine().trim().toLowerCase();
+			if (test.equals("da")) {
+				
+				provjeraRacuna();
+
+			} else if (test =="ne") {
 				System.out.println("Da bi nastavili morate kreirati račun");
-				
-					kreirajRacun();
-				
-				
+
+				kreirajRacun();
 
 			}
 
@@ -243,19 +247,44 @@ public class Start {
 
 	}
 
+
+
+	private void provjeraRacuna() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void kreirajRacun() {
 		Korisnik noviKorisnik = new Korisnik();
 		noviKorisnik
 				.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+		
+		noviKorisnik.setEmail(
+				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
+						"Neispravan format"));
 		noviKorisnik.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
-		noviKorisnik.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)", "Možete samo unijeti M za muško i F za žensko"));
+		noviKorisnik.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
+				"Možete samo unijeti M za muško i F za žensko"));
 		noviKorisnik.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
 				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
 		noviKorisnik.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
 				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+		System.out.println("---------");
 		System.out.println(noviKorisnik.getNadimak() + " dobrodošli u FitApp. Uživajte u korištenju FitApp-a.");
+		System.out.println("Vaše korisničko ime i loznika će Vam biti poslani na e-mail");
+		// slanjeMailaSImenomILozinkom(); // Dodati da pošalje mail s imenom i loznikom
+		System.out.println("---------");
 		glavniIzbornik();
+
+	}
+	
+
 		
+		
+		
+	
+
+	private void slanjeMailaSImenomILozinkom() {
 
 	}
 
