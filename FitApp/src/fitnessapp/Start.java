@@ -4,7 +4,15 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class Start {
 
@@ -23,7 +31,7 @@ public class Start {
 		korisnik = new ArrayList<Korisnik>();
 		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
 		// Ovo je da ne moraš svaki put pravit račun
-	 //	postavkeIzbornik();
+		// postavkeIzbornik();
 
 		glavniIzbornik();
 
@@ -137,8 +145,6 @@ public class Start {
 		sir.setUgljikohidrati(2);
 		sir.setMasti(27);
 		hrana.add(sir);
-		
-		
 
 	}
 
@@ -163,8 +169,6 @@ public class Start {
 		case 4 -> postavkeIzbornik();
 		case 5 -> oNamaIzbornik();
 		case 6 -> izlazIzAplikacije();
-		
-		
 
 		}
 
@@ -215,26 +219,25 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("--------");
 		System.out.println("Vraćamo Vas na glavni izbornik");
 		System.out.println("--------");
-		
-			glavniIzbornik();
-		
+
+		glavniIzbornik();
+
 	}
 
 	private void postavkeIzbornik() {
 		System.out.println("Dali imate kreiran račun? (Da/Ne)");
-		
 
 		try {
 			String test = scanner.nextLine().trim().toLowerCase();
 			if (test.equals("da")) {
-				
+
 				provjeraRacuna();
 
-			} else if (test =="ne") {
+			} else if (test == "ne") {
 				System.out.println("Da bi nastavili morate kreirati račun");
 
 				kreirajRacun();
@@ -247,18 +250,56 @@ public class Start {
 
 	}
 
-
-
 	private void provjeraRacuna() {
-		// TODO Auto-generated method stub
-		
+		// Opcija za recover password, trebam dodati .jar filove
+		// Recipient's email ID needs to be mentioned.
+	      String to = "axle.cro@gmail.com";
+
+	      // Sender's email ID needs to be mentioned
+	      String from = "zorandjukic.os@gmail.com";
+
+	      // Assuming you are sending email from localhost
+	      String host = "localhost";
+
+	      // Get system properties
+	      Properties properties = System.getProperties();
+
+	      // Setup mail server
+	      properties.setProperty("mail.smtp.host", host);
+
+	      // Get the default Session object.
+	      Session session = Session.getDefaultInstance(properties);
+
+	      try {
+	         // Create a default MimeMessage object.
+	         MimeMessage message = new MimeMessage(session);
+
+	         // Set From: header field of the header.
+	         message.setFrom(new InternetAddress(from));
+
+	         // Set To: header field of the header.
+	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+	         // Set Subject: header field
+	         message.setSubject("This is the Subject Line!");
+
+	         // Now set the actual message
+	         message.setText("This is actual message");
+
+	         // Send message
+	         Transport.send(message);
+	         System.out.println("Sent message successfully....");
+	      } catch (MessagingException mex) {
+	         mex.printStackTrace();
+	      }
+
 	}
 
 	private void kreirajRacun() {
 		Korisnik noviKorisnik = new Korisnik();
 		noviKorisnik
 				.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
-		
+
 		noviKorisnik.setEmail(
 				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
 						"Neispravan format"));
@@ -277,12 +318,6 @@ public class Start {
 		glavniIzbornik();
 
 	}
-	
-
-		
-		
-		
-	
 
 	private void slanjeMailaSImenomILozinkom() {
 
