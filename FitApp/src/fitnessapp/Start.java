@@ -2,7 +2,11 @@ package fitnessapp;
 
 import java.awt.Desktop;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
@@ -484,7 +488,27 @@ public class Start {
 	}
 
 	private void pregledDnevnikaPoDanu() {
+		izbornikDatuma();
 
+	}
+
+	private void izbornikDatuma() {
+		LocalDate danas = LocalDate.now();
+		String formatiraniDanas = danas.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		System.out.println(formatiraniDanas);
+		
+		
+		LocalDate jucer = danas.minusDays(1);
+		String formatiraniJucer = jucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		System.out.println(formatiraniJucer);
+		
+		LocalDate prekjucer = danas.minusDays(2);
+		String formatiraniPrekjucer = prekjucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		System.out.println(formatiraniPrekjucer);
+		
+		
+	
+		
 	}
 
 	public static void main(String[] args) {
