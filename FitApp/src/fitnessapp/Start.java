@@ -251,47 +251,27 @@ public class Start {
 	}
 
 	private void provjeraRacuna() {
-		// Opcija za recover password, trebam dodati .jar filove
-		// Recipient's email ID needs to be mentioned.
-	      String to = "axle.cro@gmail.com";
+		// Set up the SMTP server.
+		java.util.Properties props = new java.util.Properties();
+		props.put("mail.smtp.host", "smtp.myisp.com");
+		Session session = Session.getDefaultInstance(props, null);
 
-	      // Sender's email ID needs to be mentioned
-	      String from = "zorandjukic.os@gmail.com";
+		// Construct the message
+		String to = "axle.cro@gmai.com";
+		String from = "zorandjukic.os@gmail.com";
+		String subject = "Hello";
+		Message msg = new MimeMessage(session);
+		try {
+			msg.setFrom(new InternetAddress(from));
+			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			msg.setSubject(subject);
+			msg.setText("Hi,\n\nHow are you?");
 
-	      // Assuming you are sending email from localhost
-	      String host = "localhost";
-
-	      // Get system properties
-	      Properties properties = System.getProperties();
-
-	      // Setup mail server
-	      properties.setProperty("mail.smtp.host", host);
-
-	      // Get the default Session object.
-	      Session session = Session.getDefaultInstance(properties);
-
-	      try {
-	         // Create a default MimeMessage object.
-	         MimeMessage message = new MimeMessage(session);
-
-	         // Set From: header field of the header.
-	         message.setFrom(new InternetAddress(from));
-
-	         // Set To: header field of the header.
-	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-	         // Set Subject: header field
-	         message.setSubject("This is the Subject Line!");
-
-	         // Now set the actual message
-	         message.setText("This is actual message");
-
-	         // Send message
-	         Transport.send(message);
-	         System.out.println("Sent message successfully....");
-	      } catch (MessagingException mex) {
-	         mex.printStackTrace();
-	      }
+			// Send the message.
+			Transport.send(msg);
+		} catch (MessagingException e) {
+			// Error.
+		}
 
 	}
 
@@ -470,6 +450,40 @@ public class Start {
 	}
 
 	private void dnevnikIzbornik() {
+		System.out.println("-------------");
+		System.out.println("1. Pregled unesene hrane po danu");
+		System.out.println("2. Dodavanje hrane po danu iz baze");
+		System.out.println("3. Dodavanje vlastite hrane po danu");
+		System.out.println("4. Brisanje hrane po danu");
+		System.out.println("5. Povratak na glavni izbornik");
+		akcijaDnevnikIzbornik();
+
+	}
+
+	private void akcijaDnevnikIzbornik() {
+		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
+		case 1 -> pregledDnevnikaPoDanu();
+		case 2 -> dodavanjeHranePoDanu();
+		case 3 -> dodavanjeVlastiteHrane();
+		case 4 -> brisanjeHranePoDanu();
+		case 5 -> glavniIzbornik();
+		}
+
+	}
+
+	private void brisanjeHranePoDanu() {
+
+	}
+
+	private void dodavanjeVlastiteHrane() {
+
+	}
+
+	private void dodavanjeHranePoDanu() {
+
+	}
+
+	private void pregledDnevnikaPoDanu() {
 
 	}
 
