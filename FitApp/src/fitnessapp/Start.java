@@ -17,6 +17,7 @@ public class Start {
 	private List<Hrana> hrana;
 	private List<Aktivnosti> aktivnosti;
 	private List<Korisnik> korisnik;
+	private List<Datum> datumDnevnika;
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
@@ -25,12 +26,21 @@ public class Start {
 		aktivnosti = new ArrayList<Aktivnosti>();
 		bazaAktivnosti();
 
+		datumDnevnika = new ArrayList<Datum>();
+		bazaDatuma();
+
 		korisnik = new ArrayList<Korisnik>();
 		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
 		// Ovo je da ne moraš svaki put pravit račun
 		// postavkeIzbornik();
 
 		glavniIzbornik();
+
+	}
+
+	private void bazaDatuma() {
+		Datum datum = new Datum();
+		datumDnevnika.add(datum);
 
 	}
 
@@ -226,7 +236,10 @@ public class Start {
 
 	private void postavkeIzbornik() {
 
-		switch(Ulaz.ucitajInt("Dali imate kreiran račun? Unesite (1) ako imate kreiran račun, unesite (2) ako želite izraditi račun, unesite (3) ako imate račun, ali ste izgubili pristup ", "Možete unijesti samo (1) ako imate račun, (2) ako želite napraviti račun, (3) ako ste izgubili pristup svome računu ili (4) ako želite se vratiti na izbornik", 1, 4)) {
+		switch (Ulaz.ucitajInt(
+				"Dali imate kreiran račun? Unesite (1) ako imate kreiran račun, unesite (2) ako želite izraditi račun, unesite (3) ako imate račun, ali ste izgubili pristup ",
+				"Možete unijesti samo (1) ako imate račun, (2) ako želite napraviti račun, (3) ako ste izgubili pristup svome računu ili (4) ako želite se vratiti na izbornik",
+				1, 4)) {
 		case 1 -> pristupRacunu();
 		case 2 -> kreirajRacun();
 		case 3 -> provjeraRacuna();
@@ -236,11 +249,11 @@ public class Start {
 	}
 
 	private void pristupRacunu() {
-		//Pristup racunu koji vec postoji
+		// Pristup racunu koji vec postoji
 	}
 
 	private void provjeraRacuna() {
-		//Pristup racunu ako je imao, ali izgubio
+		// Pristup racunu ako je imao, ali izgubio
 
 	}
 
@@ -458,8 +471,25 @@ public class Start {
 	}
 
 	private void pregledDnevnikaPoDanu() {
-		izbornikDatuma();
+		dnevnikStavke("Pregled unosa po danima");
+		dnevnikIzbornik();
 
+	}
+
+	private void dnevnikStavke(String naslov) {
+		System.out.println(naslov);
+		System.out.println("-------------------");
+		if(datumDnevnika.isEmpty()) {
+			System.out.println("Trenutno nema unosa na Vašem računu");
+		} else {
+			Datum d;
+			for(int i=0; i<datumDnevnika.size();i++) {
+				d = datumDnevnika.get(i);
+				System.out.println((i+1)+ "." + d.getDatum());
+				//Nadodati ime hrane, aktivnosti, kcal itd.
+			}
+		}
+		
 	}
 
 	private void izbornikDatuma() {

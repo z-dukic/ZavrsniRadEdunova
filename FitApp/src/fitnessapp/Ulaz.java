@@ -1,5 +1,7 @@
 package fitnessapp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Ulaz {
@@ -78,6 +80,20 @@ public class Ulaz {
 		}
 
 		return string;
+	}
+	
+	public static String formatDatuma="dd.MM.yyyy";
+	public static Date ucitajDatum(String poruka) {
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		while(true) {
+			System.out.println(poruka);
+			try {
+				return sdf.parse(scanner.nextLine());
+			} catch (Exception e) {
+				System.out.println("Ne ispravan format datuma. "
+						+ "Primjer unosa: " + sdf.format(new Date()));
+			}
+		}
 	}
 
 }
