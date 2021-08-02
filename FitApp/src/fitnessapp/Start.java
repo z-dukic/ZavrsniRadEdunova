@@ -11,13 +11,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 public class Start {
 
 	Scanner scanner = new Scanner(System.in);
@@ -204,13 +197,12 @@ public class Start {
 	private void oNamaIzbornik() {
 
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
-		System.out.println("Ako želite znati više upišite da, ako se želite vratiti na glavni izbornik upišite ne.");
 
-		switch (Ulaz.daIliNe("Želite li znati više", "Neispravan unos. Možete samo odgovoriti sa da ili ne", "da",
-				"ne")) {
-		case "da" -> ucitajLink();
-		case "ne" -> glavniIzbornik();
+		switch (Ulaz.ucitajInt("Ako želite znati više upišite da, ako se želite vratiti na glavni izbornik upišite ne.",
+				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 2)) {
 
+		case 1 -> ucitajLink();
+		case 2 -> glavniIzbornik();
 		}
 
 	}
@@ -233,49 +225,22 @@ public class Start {
 	}
 
 	private void postavkeIzbornik() {
-		System.out.println("Dali imate kreiran račun? (Da/Ne)");
 
-		try {
-			String test = scanner.nextLine().trim().toLowerCase();
-			if (test.equals("da")) {
-
-				provjeraRacuna();
-
-			} else if (test == "ne") {
-				System.out.println("Da bi nastavili morate kreirati račun");
-
-				kreirajRacun();
-
-			}
-
-		} catch (Exception e) {
-			System.out.println("Niste dobro unijeli broj");
+		switch(Ulaz.ucitajInt("Dali imate kreiran račun? Unesite (1) ako imate kreiran račun, unesite (2) ako želite izraditi račun, unesite (3) ako imate račun, ali ste izgubili pristup ", "Možete unijesti samo (1) ako imate račun, (2) ako želite napraviti račun, (3) ako ste izgubili pristup svome računu ili (4) ako želite se vratiti na izbornik", 1, 4)) {
+		case 1 -> pristupRacunu();
+		case 2 -> kreirajRacun();
+		case 3 -> provjeraRacuna();
+		case 4 -> glavniIzbornik();
 		}
 
 	}
 
+	private void pristupRacunu() {
+		//Pristup racunu koji vec postoji
+	}
+
 	private void provjeraRacuna() {
-		// Set up the SMTP server.
-		java.util.Properties props = new java.util.Properties();
-		props.put("mail.smtp.host", "smtp.myisp.com");
-		Session session = Session.getDefaultInstance(props, null);
-
-		// Construct the message
-		String to = "axle.cro@gmai.com";
-		String from = "zorandjukic.os@gmail.com";
-		String subject = "Hello";
-		Message msg = new MimeMessage(session);
-		try {
-			msg.setFrom(new InternetAddress(from));
-			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			msg.setSubject(subject);
-			msg.setText("Hi,\n\nHow are you?");
-
-			// Send the message.
-			Transport.send(msg);
-		} catch (MessagingException e) {
-			// Error.
-		}
+		//Pristup racunu ako je imao, ali izgubio
 
 	}
 
@@ -465,13 +430,18 @@ public class Start {
 	}
 
 	private void akcijaDnevnikIzbornik() {
-		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
+		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 6)) {
 		case 1 -> pregledDnevnikaPoDanu();
 		case 2 -> dodavanjeHranePoDanu();
-		case 3 -> dodavanjeVlastiteHrane();
+		case 3 -> dodavanjeAktivnostiPoDanu();
 		case 4 -> brisanjeHranePoDanu();
-		case 5 -> glavniIzbornik();
+		case 5 -> brisanjeAktivnostiPoDanu();
+		case 6 -> glavniIzbornik();
 		}
+
+	}
+
+	private void brisanjeAktivnostiPoDanu() {
 
 	}
 
@@ -479,7 +449,7 @@ public class Start {
 
 	}
 
-	private void dodavanjeVlastiteHrane() {
+	private void dodavanjeAktivnostiPoDanu() {
 
 	}
 
@@ -496,19 +466,15 @@ public class Start {
 		LocalDate danas = LocalDate.now();
 		String formatiraniDanas = danas.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		System.out.println(formatiraniDanas);
-		
-		
+
 		LocalDate jucer = danas.minusDays(1);
 		String formatiraniJucer = jucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		System.out.println(formatiraniJucer);
-		
+
 		LocalDate prekjucer = danas.minusDays(2);
 		String formatiraniPrekjucer = prekjucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		System.out.println(formatiraniPrekjucer);
-		
-		
-	
-		
+
 	}
 
 	public static void main(String[] args) {

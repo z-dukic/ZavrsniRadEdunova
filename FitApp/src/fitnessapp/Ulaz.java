@@ -47,24 +47,22 @@ public class Ulaz {
 		return broj;
 	}
 
-	public static String daIliNe(String poruka, String greska, String da, String ne) {
-		String izjava = "";
+	public static boolean daIliNe(String poruka, String greska) {
+		String izjava;
 
 		while (true) {
-			try {
-				izjava = scanner.nextLine().trim().toLowerCase();
-				if (izjava == "da" || izjava == "ne") {
-					System.out.println("Možete odgovoriti samo sa da ili ne");
-					continue;
-				}
-				break;
-
-			} catch (Exception e) {
-				System.out.println(greska);
+			System.out.println(poruka);
+			izjava=scanner.nextLine();
+			if(izjava.trim().toLowerCase().equals("da")) {
+				return true;
 			}
+			if(izjava.trim().toLowerCase().equals("ne")) {
+				return false;
+			}
+			System.out.println(greska + " (unos da/ne)");
 		}
 
-		return izjava;
+		
 	}
 
 	public static String ucitajString(String poruka, String greska) {
