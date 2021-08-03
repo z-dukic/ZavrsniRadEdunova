@@ -8,14 +8,14 @@ public class Ulaz {
 
 	public static Scanner scanner = new Scanner(System.in);
 
-	public static String ucitajSpol(String poruka, String greska ) {
+	public static String ucitajSpol(String poruka, String greska) {
 		String spolString = "";
-		
-		while(true) {
+
+		while (true) {
 			System.out.println(poruka);
 			try {
 				spolString = scanner.nextLine().trim().toLowerCase();
-				if(spolString.equals("M") || spolString.equals("F")) {
+				if (spolString.equals("M") || spolString.equals("F")) {
 					System.out.println("Možete odgovoriti samo sa M(Muško) ili F(Žensko)");
 					continue;
 				}
@@ -54,17 +54,16 @@ public class Ulaz {
 
 		while (true) {
 			System.out.println(poruka);
-			izjava=scanner.nextLine();
-			if(izjava.trim().toLowerCase().equals("da")) {
+			izjava = scanner.nextLine();
+			if (izjava.trim().toLowerCase().equals("da")) {
 				return true;
 			}
-			if(izjava.trim().toLowerCase().equals("ne")) {
+			if (izjava.trim().toLowerCase().equals("ne")) {
 				return false;
 			}
 			System.out.println(greska + " (unos da/ne)");
 		}
 
-		
 	}
 
 	public static String ucitajString(String poruka, String greska) {
@@ -81,17 +80,17 @@ public class Ulaz {
 
 		return string;
 	}
-	
-	public static String formatDatuma="dd.MM.yyyy";
+
+	public static String formatDatuma = "dd.MM.yyyy";
+
 	public static Date ucitajDatum(String poruka) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		while(true) {
+		while (true) {
 			System.out.println(poruka);
 			try {
 				return sdf.parse(scanner.nextLine());
 			} catch (Exception e) {
-				System.out.println("Ne ispravan format datuma. "
-						+ "Primjer unosa: " + sdf.format(new Date()));
+				System.out.println("Ne ispravan format datuma. " + "Primjer unosa: " + sdf.format(new Date()));
 			}
 		}
 	}

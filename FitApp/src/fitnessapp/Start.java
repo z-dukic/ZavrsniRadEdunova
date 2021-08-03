@@ -17,7 +17,7 @@ public class Start {
 	private List<Hrana> hrana;
 	private List<Aktivnosti> aktivnosti;
 	private List<Korisnik> korisnik;
-	private List<Datum> datumDnevnika;
+	private List<Dnevnik> datumDnevnika;
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
@@ -26,7 +26,7 @@ public class Start {
 		aktivnosti = new ArrayList<Aktivnosti>();
 		bazaAktivnosti();
 
-		datumDnevnika = new ArrayList<Datum>();
+		datumDnevnika = new ArrayList<Dnevnik>();
 		bazaDatuma();
 
 		korisnik = new ArrayList<Korisnik>();
@@ -39,7 +39,7 @@ public class Start {
 	}
 
 	private void bazaDatuma() {
-		Datum datum = new Datum();
+		Dnevnik datum = new Dnevnik();
 		datumDnevnika.add(datum);
 
 	}
@@ -422,9 +422,9 @@ public class Start {
 				System.out.println((i + 1) + ". " + h.getImeHrane());
 			}
 		}
-		izbornikHrane();
+		//izbornikHrane();
 		akcijaIzbornikHrane();
-
+		// Pojavi se u dnevniku
 	}
 
 	private void hranaStavke(String naslov) {
@@ -467,7 +467,22 @@ public class Start {
 	}
 
 	private void dodavanjeHranePoDanu() {
+		Dnevnik d = new Dnevnik();
+		d = dnevnikPostaviVrijednosti(d);
+		datumDnevnika.add(d);
+		//dnevnikIzbornik(); - //pojavljuje se u dnevniku
+		//akcijaDnevnikIzbornik(); - //pojavljuje se u dnevniku
 
+	}
+
+	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
+		d.setDatum(Ulaz.ucitajString("Unesite datum kada ste unijeli ili potrošili kalorije",
+				"Nije ispravan unos. Pokušajte ponovo."));
+		pregledBazeHrane();
+		d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
+				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+
+		return d;
 	}
 
 	private void pregledDnevnikaPoDanu() {
@@ -479,17 +494,18 @@ public class Start {
 	private void dnevnikStavke(String naslov) {
 		System.out.println(naslov);
 		System.out.println("-------------------");
-		if(datumDnevnika.isEmpty()) {
+		if (datumDnevnika.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
-			Datum d;
-			for(int i=0; i<datumDnevnika.size();i++) {
+			Dnevnik d;
+
+			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
-				System.out.println((i+1)+ "." + d.getDatum());
-				//Nadodati ime hrane, aktivnosti, kcal itd.
+				System.out.println((i + 1) + "." + d.getDatum() + d.getHrana().getImeHrane());
+				// Nadodati ime hrane, aktivnosti, kcal itd.
 			}
 		}
-		
+
 	}
 
 	private void izbornikDatuma() {
