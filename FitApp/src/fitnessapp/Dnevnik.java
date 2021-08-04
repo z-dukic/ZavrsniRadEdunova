@@ -1,8 +1,10 @@
 package fitnessapp;
 
+import java.util.Date;
+
 public class Dnevnik {
 
-	private String datum;
+	private Date datum;
 	private Aktivnosti aktivnost;
 	private Hrana hrana;
 
@@ -22,12 +24,14 @@ public class Dnevnik {
 		this.hrana = hrana;
 	}
 
-	public String getDatum() {
+	public Date getDatum() {
 		return datum;
 	}
 
-	public void setDatum(String datum) {
+	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
+
+
 
 }

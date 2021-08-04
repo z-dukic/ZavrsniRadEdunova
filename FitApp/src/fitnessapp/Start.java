@@ -21,10 +21,10 @@ public class Start {
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
-		bazaHrane();
+	//	bazaHrane();
 
 		aktivnosti = new ArrayList<Aktivnosti>();
-		bazaAktivnosti();
+	//	bazaAktivnosti();
 
 		datumDnevnika = new ArrayList<Dnevnik>();
 		bazaDatuma();
@@ -44,7 +44,7 @@ public class Start {
 
 	}
 
-	private void bazaAktivnosti() {
+	/* private void bazaAktivnosti() {
 		Aktivnosti trcanje = new Aktivnosti();
 		trcanje.setImeAktivnosti("Trcanje");
 		trcanje.setPotroseneKalorijePoSatu(600);
@@ -69,10 +69,10 @@ public class Start {
 		rukomet.setImeAktivnosti("Rukomet");
 		rukomet.setVrijemeTrajanjaUMinutama(450);
 		aktivnosti.add(rukomet);
+/
+	} */
 
-	}
-
-	private void bazaHrane() {
+/*	private void bazaHrane() {
 		Hrana mrkva = new Hrana();
 		mrkva.setImeHrane("Mrkva");
 		mrkva.setKalorije(35);
@@ -153,7 +153,7 @@ public class Start {
 		sir.setMasti(27);
 		hrana.add(sir);
 
-	}
+	} */
 
 	private void glavniIzbornik() {
 		System.out.println("****FitApp****");
@@ -422,9 +422,12 @@ public class Start {
 				System.out.println((i + 1) + ". " + h.getImeHrane());
 			}
 		}
-		//izbornikHrane();
-		akcijaIzbornikHrane();
+		 izbornikHrane();
+		 akcijaIzbornikHrane();
 		// Pojavi se u dnevniku
+		// Treba preraditi da se vidi pregled unesene hrane, ali da se ne vidi izbornik.
+		// Kad ideš u bazu hrane pokaže ti hranu, ali ti ne pokaže akciju
+		// Kad ideš u dnevnik
 	}
 
 	private void hranaStavke(String naslov) {
@@ -470,19 +473,25 @@ public class Start {
 		Dnevnik d = new Dnevnik();
 		d = dnevnikPostaviVrijednosti(d);
 		datumDnevnika.add(d);
-		//dnevnikIzbornik(); - //pojavljuje se u dnevniku
-		//akcijaDnevnikIzbornik(); - //pojavljuje se u dnevniku
-
+		dnevnikIzbornik(); //pojavljuje se u dnevniku
+		// akcijaDnevnikIzbornik(); //pojavljuje se u dnevniku
+		// pregledDnevnikaPoDanu();
 	}
 
 	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
-		d.setDatum(Ulaz.ucitajString("Unesite datum kada ste unijeli ili potrošili kalorije",
-				"Nije ispravan unos. Pokušajte ponovo."));
+		d.setDatum(Ulaz.ucitajDatum("Unesi datum pocekta"));
+		
 		pregledBazeHrane();
 		d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
-				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
-
+		"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+		
+		pregledBazeAktivnosti();
+		d.setAktivnost(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
+				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+		
 		return d;
+
+		// Napraviti pregled da se vidi ostalo
 	}
 
 	private void pregledDnevnikaPoDanu() {
@@ -498,11 +507,14 @@ public class Start {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
 			Dnevnik d;
+			
 
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
-				System.out.println((i + 1) + "." + d.getDatum() + d.getHrana().getImeHrane());
+				
+				System.out.println((i + 1) + "." +  d.getDatum() + d.getHrana().getImeHrane() + d.getAktivnost().getImeAktivnosti());
 				// Nadodati ime hrane, aktivnosti, kcal itd.
+				
 			}
 		}
 

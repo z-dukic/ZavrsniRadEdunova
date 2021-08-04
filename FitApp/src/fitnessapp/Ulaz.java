@@ -84,7 +84,7 @@ public class Ulaz {
 	public static String formatDatuma = "dd.MM.yyyy";
 
 	public static Date ucitajDatum(String poruka) {
-		SimpleDateFormat sdf = new SimpleDateFormat();
+		SimpleDateFormat sdf = new SimpleDateFormat(formatDatuma);
 		while (true) {
 			System.out.println(poruka);
 			try {
