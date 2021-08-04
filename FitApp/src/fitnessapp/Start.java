@@ -331,6 +331,11 @@ public class Start {
 
 	private void pregledBazeAktivnosti() {
 		aktivnostiStavke("Pregled unesenih aktivnosti");
+	
+
+	}
+
+	private void aktivnostiStavke(String poruka) {
 		System.out.println("-----------");
 
 		if (aktivnosti.size() == 0) {
@@ -344,14 +349,8 @@ public class Start {
 			}
 
 		}
-		izbornikAktivnosti();
-		akcijaIzbornikAktivnosti();
 
-	}
-
-	private String aktivnostiStavke(String poruka) {
-
-		return poruka;
+		
 
 	}
 
@@ -407,6 +406,16 @@ public class Start {
 
 	private void pregledBazeHrane() {
 		hranaStavke("Pregled unesene hrane");
+		
+		// izbornikHrane();
+		// akcijaIzbornikHrane();
+		// Pojavi se u dnevniku
+		// Treba preraditi da se vidi pregled unesene hrane, ali da se ne vidi izbornik.
+		// Kad ideš u bazu hrane pokaže ti hranu, ali ti ne pokaže akciju
+		// Kad ideš u dnevnik
+	}
+
+	private void hranaStavke(String naslov) {
 		System.out.println("--------------");
 
 		if (hrana.size() == 0) {
@@ -422,15 +431,6 @@ public class Start {
 				System.out.println((i + 1) + ". " + h.getImeHrane());
 			}
 		}
-		 izbornikHrane();
-		 akcijaIzbornikHrane();
-		// Pojavi se u dnevniku
-		// Treba preraditi da se vidi pregled unesene hrane, ali da se ne vidi izbornik.
-		// Kad ideš u bazu hrane pokaže ti hranu, ali ti ne pokaže akciju
-		// Kad ideš u dnevnik
-	}
-
-	private void hranaStavke(String naslov) {
 
 	}
 
