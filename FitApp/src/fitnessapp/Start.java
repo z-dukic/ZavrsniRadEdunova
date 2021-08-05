@@ -166,7 +166,7 @@ public class Start {
 		case 1 -> dnevnikIzbornik();
 		case 2 -> izbornikHrane();
 		case 3 -> izbornikAktivnosti();
-		case 4 -> postavkeIzbornik();
+		case 4 -> korisnikIzbornik();
 		case 5 -> oNamaIzbornik();
 		case 6 -> izlazIzAplikacije();
 
@@ -227,22 +227,47 @@ public class Start {
 
 	}
 
-	private void postavkeIzbornik() {
+	private void korisnikIzbornik() {
+		System.out.println("---------------");
+		System.out.println("Postavke korisnika");
+		System.out.println("1. Pregled svih korisnika");
+		System.out.println("2. Kreiranje računa");
+		System.out.println("3. Provjera računa");
+		System.out.println("4. Povratak na glavni izbornik");
+		KorisnikUcitajAkciju();
+	}
 
-		switch (Ulaz.ucitajInt(
-				"Dali imate kreiran račun? Unesite (1) ako imate kreiran račun, unesite (2) ako želite izraditi račun, unesite (3) ako imate račun, ali ste izgubili pristup ",
-				"Možete unijesti samo (1) ako imate račun, (2) ako želite napraviti račun, (3) ako ste izgubili pristup svome računu ili (4) ako želite se vratiti na izbornik",
-				1, 4)) {
-		case 1 -> pristupRacunu();
-		case 2 -> kreirajRacun();
+	private void KorisnikUcitajAkciju() {
+
+		switch (Ulaz.ucitajInt("Odaberite akciju od 1 do 4", "Pogrešan unos. Možete izabrati samo od 1 do 4", 1, 4)) {
+		case 1 -> {
+			pregledKorisnika();
+			korisnikIzbornik();
+		}
+		case 2 -> korisnikUnosRacuna();
 		case 3 -> provjeraRacuna();
 		case 4 -> glavniIzbornik();
 		}
 
 	}
 
-	private void pristupRacunu() {
-		// Pristup racunu koji vec postoji
+	private void pregledKorisnika() {
+		pristupRacunuStavke("Pregled svih računa");
+	}
+
+	private void pristupRacunuStavke(String naslov) {
+		System.out.println(naslov);
+		System.out.println("--------------");
+		if (korisnik.isEmpty()) {
+			System.out.println("Nema unesenih korisnika");
+		} else {
+			Korisnik k;
+			for (int i = 0; i < korisnik.size(); i++) {
+				k = korisnik.get(i);
+				System.out.println((i + 1) + "." + k.getNadimak());
+			}
+		}
+
 	}
 
 	private void provjeraRacuna() {
@@ -250,27 +275,34 @@ public class Start {
 
 	}
 
-	private void kreirajRacun() {
-		Korisnik noviKorisnik = new Korisnik();
-		noviKorisnik
-				.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+	private void korisnikUnosRacuna() {
+		Korisnik k = new Korisnik();
+		k = kreirajRacun(k);
+		korisnik.add(k);
+		korisnikIzbornik();
 
-		noviKorisnik.setEmail(
+	}
+
+	private Korisnik kreirajRacun(Korisnik k) {
+		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+
+		k.setEmail(
 				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
 						"Neispravan format"));
-		noviKorisnik.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
-		noviKorisnik.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
+		k.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
+		k.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
 				"Možete samo unijeti M za muško i F za žensko"));
-		noviKorisnik.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
+		k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
 				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
-		noviKorisnik.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
+		k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
 				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
 		System.out.println("---------");
-		System.out.println(noviKorisnik.getNadimak() + " dobrodošli u FitApp. Uživajte u korištenju FitApp-a.");
+		System.out.println(k.getNadimak() + " dobrodošli u FitApp. Uživajte u korištenju FitApp-a.");
 		System.out.println("Vaše korisničko ime i loznika će Vam biti poslani na e-mail");
 		// slanjeMailaSImenomILozinkom(); // Dodati da pošalje mail s imenom i loznikom
 		System.out.println("---------");
-		glavniIzbornik();
+		korisnikIzbornik();
+		return k;
 
 	}
 
