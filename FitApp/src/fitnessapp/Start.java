@@ -21,13 +21,14 @@ public class Start {
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
-	//	bazaHrane();
+		// bazaHrane();
 
 		aktivnosti = new ArrayList<Aktivnosti>();
-	//	bazaAktivnosti();
+		// bazaAktivnosti();
 
 		datumDnevnika = new ArrayList<Dnevnik>();
-		bazaDatuma();
+		
+		
 
 		korisnik = new ArrayList<Korisnik>();
 		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
@@ -38,122 +39,71 @@ public class Start {
 
 	}
 
-	private void bazaDatuma() {
-		Dnevnik datum = new Dnevnik();
-		datumDnevnika.add(datum);
 
-	}
 
-	/* private void bazaAktivnosti() {
-		Aktivnosti trcanje = new Aktivnosti();
-		trcanje.setImeAktivnosti("Trcanje");
-		trcanje.setPotroseneKalorijePoSatu(600);
-		aktivnosti.add(trcanje);
+	/*
+	 * private void bazaAktivnosti() { Aktivnosti trcanje = new Aktivnosti();
+	 * trcanje.setImeAktivnosti("Trcanje"); trcanje.setPotroseneKalorijePoSatu(600);
+	 * aktivnosti.add(trcanje);
+	 * 
+	 * Aktivnosti nogomet = new Aktivnosti(); nogomet.setImeAktivnosti("Nogomet");
+	 * nogomet.setPotroseneKalorijePoSatu(500); aktivnosti.add(nogomet);
+	 * 
+	 * Aktivnosti skijanje = new Aktivnosti();
+	 * skijanje.setImeAktivnosti("Skijanje");
+	 * skijanje.setPotroseneKalorijePoSatu(350); aktivnosti.add(skijanje);
+	 * 
+	 * Aktivnosti bicikliranje = new Aktivnosti();
+	 * bicikliranje.setImeAktivnosti("Bicikliranje");
+	 * bicikliranje.setPotroseneKalorijePoSatu(300); aktivnosti.add(bicikliranje);
+	 * 
+	 * Aktivnosti rukomet = new Aktivnosti(); rukomet.setImeAktivnosti("Rukomet");
+	 * rukomet.setVrijemeTrajanjaUMinutama(450); aktivnosti.add(rukomet); / }
+	 */
 
-		Aktivnosti nogomet = new Aktivnosti();
-		nogomet.setImeAktivnosti("Nogomet");
-		nogomet.setPotroseneKalorijePoSatu(500);
-		aktivnosti.add(nogomet);
-
-		Aktivnosti skijanje = new Aktivnosti();
-		skijanje.setImeAktivnosti("Skijanje");
-		skijanje.setPotroseneKalorijePoSatu(350);
-		aktivnosti.add(skijanje);
-
-		Aktivnosti bicikliranje = new Aktivnosti();
-		bicikliranje.setImeAktivnosti("Bicikliranje");
-		bicikliranje.setPotroseneKalorijePoSatu(300);
-		aktivnosti.add(bicikliranje);
-
-		Aktivnosti rukomet = new Aktivnosti();
-		rukomet.setImeAktivnosti("Rukomet");
-		rukomet.setVrijemeTrajanjaUMinutama(450);
-		aktivnosti.add(rukomet);
-/
-	} */
-
-/*	private void bazaHrane() {
-		Hrana mrkva = new Hrana();
-		mrkva.setImeHrane("Mrkva");
-		mrkva.setKalorije(35);
-		mrkva.setProteini(0);
-		mrkva.setUgljikohidrati(8);
-		mrkva.setMasti(0);
-		hrana.add(mrkva);
-
-		Hrana jabuka = new Hrana();
-		jabuka.setImeHrane("Jabuka");
-		jabuka.setKalorije(48);
-		jabuka.setProteini(0);
-		jabuka.setUgljikohidrati(13);
-		jabuka.setMasti(0);
-		hrana.add(jabuka);
-
-		Hrana banana = new Hrana();
-		banana.setImeHrane("Banana");
-		banana.setKalorije(89);
-		banana.setProteini(0);
-		banana.setUgljikohidrati(23);
-		banana.setMasti(0);
-		hrana.add(banana);
-
-		Hrana breskva = new Hrana();
-		breskva.setImeHrane("Breskva");
-		breskva.setKalorije(39);
-		breskva.setProteini(10);
-		breskva.setUgljikohidrati(0);
-		breskva.setMasti(0);
-		hrana.add(breskva);
-
-		Hrana luk = new Hrana();
-		luk.setImeHrane("Luk");
-		luk.setKalorije(40);
-		luk.setProteini(0);
-		luk.setUgljikohidrati(10);
-		luk.setMasti(0);
-		hrana.add(luk);
-
-		Hrana cocaCola = new Hrana();
-		cocaCola.setImeHrane("Coca-cola");
-		cocaCola.setKalorije(41);
-		cocaCola.setProteini(0);
-		cocaCola.setUgljikohidrati(10);
-		cocaCola.setMasti(0);
-		hrana.add(cocaCola);
-
-		Hrana cips = new Hrana();
-		cips.setImeHrane("Čips");
-		cips.setKalorije(547);
-		cips.setProteini(7);
-		cips.setUgljikohidrati(50);
-		cips.setMasti(37);
-		hrana.add(cips);
-
-		Hrana bigMac = new Hrana();
-		bigMac.setImeHrane("Big Mac");
-		bigMac.setKalorije(257);
-		bigMac.setProteini(12);
-		bigMac.setUgljikohidrati(20);
-		bigMac.setMasti(15);
-		hrana.add(bigMac);
-
-		Hrana bolognese = new Hrana();
-		bolognese.setImeHrane("Špagete Bolognese");
-		bolognese.setKalorije(113);
-		bolognese.setProteini(7);
-		bolognese.setUgljikohidrati(9);
-		bolognese.setMasti(7);
-		hrana.add(bolognese);
-
-		Hrana sir = new Hrana();
-		sir.setImeHrane("Sir gauda");
-		sir.setKalorije(356);
-		sir.setProteini(25);
-		sir.setUgljikohidrati(2);
-		sir.setMasti(27);
-		hrana.add(sir);
-
-	} */
+	/*
+	  private void bazaHrane() { Hrana mrkva = new Hrana();
+	  mrkva.setImeHrane("Mrkva"); mrkva.setKalorije(35); mrkva.setProteini(0);
+	  mrkva.setUgljikohidrati(8); mrkva.setMasti(0); hrana.add(mrkva);
+	  
+	 * Hrana jabuka = new Hrana(); jabuka.setImeHrane("Jabuka");
+	 * jabuka.setKalorije(48); jabuka.setProteini(0); jabuka.setUgljikohidrati(13);
+	 * jabuka.setMasti(0); hrana.add(jabuka);
+	 * 
+	 * Hrana banana = new Hrana(); banana.setImeHrane("Banana");
+	 * banana.setKalorije(89); banana.setProteini(0); banana.setUgljikohidrati(23);
+	 * banana.setMasti(0); hrana.add(banana);
+	 * 
+	 * Hrana breskva = new Hrana(); breskva.setImeHrane("Breskva");
+	 * breskva.setKalorije(39); breskva.setProteini(10);
+	 * breskva.setUgljikohidrati(0); breskva.setMasti(0); hrana.add(breskva);
+	 * 
+	 * Hrana luk = new Hrana(); luk.setImeHrane("Luk"); luk.setKalorije(40);
+	 * luk.setProteini(0); luk.setUgljikohidrati(10); luk.setMasti(0);
+	 * hrana.add(luk);
+	 * 
+	 * Hrana cocaCola = new Hrana(); cocaCola.setImeHrane("Coca-cola");
+	 * cocaCola.setKalorije(41); cocaCola.setProteini(0);
+	 * cocaCola.setUgljikohidrati(10); cocaCola.setMasti(0); hrana.add(cocaCola);
+	 * 
+	 * Hrana cips = new Hrana(); cips.setImeHrane("Čips"); cips.setKalorije(547);
+	 * cips.setProteini(7); cips.setUgljikohidrati(50); cips.setMasti(37);
+	 * hrana.add(cips);
+	 * 
+	 * Hrana bigMac = new Hrana(); bigMac.setImeHrane("Big Mac");
+	 * bigMac.setKalorije(257); bigMac.setProteini(12);
+	 * bigMac.setUgljikohidrati(20); bigMac.setMasti(15); hrana.add(bigMac);
+	 * 
+	 * Hrana bolognese = new Hrana(); bolognese.setImeHrane("Špagete Bolognese");
+	 * bolognese.setKalorije(113); bolognese.setProteini(7);
+	 * bolognese.setUgljikohidrati(9); bolognese.setMasti(7); hrana.add(bolognese);
+	 * 
+	 * Hrana sir = new Hrana(); sir.setImeHrane("Sir gauda"); sir.setKalorije(356);
+	 * sir.setProteini(25); sir.setUgljikohidrati(2); sir.setMasti(27);
+	 * hrana.add(sir);
+	 */ 
+	 // }
+	 
 
 	private void glavniIzbornik() {
 		System.out.println("****FitApp****");
@@ -331,7 +281,6 @@ public class Start {
 
 	private void pregledBazeAktivnosti() {
 		aktivnostiStavke("Pregled unesenih aktivnosti");
-	
 
 	}
 
@@ -349,8 +298,6 @@ public class Start {
 			}
 
 		}
-
-		
 
 	}
 
@@ -406,7 +353,7 @@ public class Start {
 
 	private void pregledBazeHrane() {
 		hranaStavke("Pregled unesene hrane");
-		
+
 		// izbornikHrane();
 		// akcijaIzbornikHrane();
 		// Pojavi se u dnevniku
@@ -447,7 +394,7 @@ public class Start {
 
 	private void akcijaDnevnikIzbornik() {
 		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 6)) {
-		case 1 -> pregledDnevnikaPoDanu();
+		case 1 -> dnevnikPregled();
 		case 2 -> dodavanjeHranePoDanu();
 		case 3 -> dodavanjeAktivnostiPoDanu();
 		case 4 -> brisanjeHranePoDanu();
@@ -473,28 +420,26 @@ public class Start {
 		Dnevnik d = new Dnevnik();
 		d = dnevnikPostaviVrijednosti(d);
 		datumDnevnika.add(d);
-		dnevnikIzbornik(); //pojavljuje se u dnevniku
-		// akcijaDnevnikIzbornik(); //pojavljuje se u dnevniku
-		// pregledDnevnikaPoDanu();
+		dnevnikIzbornik(); 
 	}
 
 	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
 		d.setDatum(Ulaz.ucitajDatum("Unesi datum pocekta"));
-		
+
 		pregledBazeHrane();
 		d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
-		"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
-		
+				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+
 		pregledBazeAktivnosti();
 		d.setAktivnost(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
-		
+
 		return d;
 
 		// Napraviti pregled da se vidi ostalo
 	}
 
-	private void pregledDnevnikaPoDanu() {
+	private void dnevnikPregled() {
 		dnevnikStavke("Pregled unosa po danima");
 		dnevnikIzbornik();
 
@@ -507,20 +452,19 @@ public class Start {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
 			Dnevnik d;
-			
 
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
-				
-				System.out.println((i + 1) + "." +  d.getDatum() + d.getHrana().getImeHrane() + d.getAktivnost().getImeAktivnosti());
+
+				System.out.println((i + 1) + "." + d.getHrana().getImeHrane() + d.getAktivnost().getImeAktivnosti());
 				// Nadodati ime hrane, aktivnosti, kcal itd.
-				
+
 			}
 		}
 
 	}
 
-	private void izbornikDatuma() {
+	/*private void izbornikDatuma() {
 		LocalDate danas = LocalDate.now();
 		String formatiraniDanas = danas.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		System.out.println(formatiraniDanas);
@@ -533,7 +477,7 @@ public class Start {
 		String formatiraniPrekjucer = prekjucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		System.out.println(formatiraniPrekjucer);
 
-	}
+	}*/
 
 	public static void main(String[] args) {
 		new Start();
