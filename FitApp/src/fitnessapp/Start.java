@@ -443,39 +443,35 @@ public class Start {
 	private void dnevnikIzbornik() {
 		System.out.println("-------------");
 		System.out.println("1. Pregled unesene hrane po danu");
-		System.out.println("2. Dodavanje hrane po danu iz baze");
-		System.out.println("3. Dodavanje vlastite hrane po danu");
-		System.out.println("4. Brisanje hrane po danu");
+		System.out.println("2. Dodavanje hrane i/ili aktivnosti");
+		System.out.println("3. Brisanje hrane i/ili aktivnosti");
+		System.out.println("4. Statistika");
 		System.out.println("5. Povratak na glavni izbornik");
 		akcijaDnevnikIzbornik();
 
 	}
 
 	private void akcijaDnevnikIzbornik() {
-		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 6)) {
+		switch (Ulaz.ucitajInt("Odaberite sljedeću akciju", "Niste unijeli cijeli broj", 1, 5)) {
 		case 1 -> dnevnikPregled();
-		case 2 -> dodavanjeHranePoDanu();
-		case 3 -> dodavanjeAktivnostiPoDanu();
-		case 4 -> brisanjeHranePoDanu();
-		case 5 -> brisanjeAktivnostiPoDanu();
-		case 6 -> glavniIzbornik();
+		case 2 -> dodavanjeHraneIliAktivnostiPoDanu();
+		case 3 -> brisanjeHraneIliAktivnostiPoDanu();
+		case 4 -> pregledStatistike();
+		case 5 -> glavniIzbornik();
+
 		}
 
 	}
 
-	private void brisanjeAktivnostiPoDanu() {
+	private void pregledStatistike() {
 
 	}
 
-	private void brisanjeHranePoDanu() {
+	private void brisanjeHraneIliAktivnostiPoDanu() {
 
 	}
 
-	private void dodavanjeAktivnostiPoDanu() {
-
-	}
-
-	private void dodavanjeHranePoDanu() {
+	private void dodavanjeHraneIliAktivnostiPoDanu() {
 		Dnevnik d = new Dnevnik();
 		d = dnevnikPostaviVrijednosti(d);
 		datumDnevnika.add(d);
@@ -495,7 +491,6 @@ public class Start {
 
 		return d;
 
-		// Napraviti pregled da se vidi ostalo
 	}
 
 	private void dnevnikPregled() {
@@ -514,17 +509,18 @@ public class Start {
 
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
-
-				
-				System.out.println("Danas ste unijeli sljedeću hranu: " + d.getHrana().getImeHrane() + " " +
-						+ d.getHrana().getKalorije() + " kcal, " + d.getHrana().getProteini() + " proteina," +
-						+ d.getHrana().getUgljikohidrati() + " ugljikohidrata," +  d.getHrana().getMasti() + " masti. " );
-				System.out.println("Danas ste obavili sljedeće aktivnosti: " + d.getAktivnost().getImeAktivnosti() + " "
+				System.out.println("Danas ste unijeli sljedeću hranu: ");
+				System.out.println(d.getHrana().getImeHrane() + " "
+						+ +d.getHrana().getKalorije() + " kcal, " + d.getHrana().getProteini() + " proteina,"
+						+ +d.getHrana().getUgljikohidrati() + " ugljikohidrata," + d.getHrana().getMasti()
+						+ " masti. ");
+				System.out.println("Danas ste obavili sljedeće aktivnosti: ");
+				System.out.println(d.getAktivnost().getImeAktivnosti() + " "
 						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
 				// Nadodati ime hrane, aktivnosti, kcal itd.
 
 			}
-			
+
 		}
 
 	}
