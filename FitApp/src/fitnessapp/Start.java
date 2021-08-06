@@ -2,13 +2,10 @@ package fitnessapp;
 
 import java.awt.Desktop;
 import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
-import java.util.Properties;
+
 import java.util.Scanner;
 
 public class Start {
@@ -29,9 +26,6 @@ public class Start {
 		datumDnevnika = new ArrayList<Dnevnik>();
 
 		korisnik = new ArrayList<Korisnik>();
-		// Nakon što napraviš korisnika obriši glavniIzbornik i ostavi postavkeIzbornik.
-		// Ovo je da ne moraš svaki put pravit račun
-		// postavkeIzbornik();
 
 		glavniIzbornik();
 
@@ -230,9 +224,9 @@ public class Start {
 	private void korisnikIzbornik() {
 		System.out.println("---------------");
 		System.out.println("Postavke korisnika");
-		System.out.println("1. Pregled svih korisnika");
-		System.out.println("2. Kreiranje računa");
-		System.out.println("3. Provjera računa");
+		System.out.println("1. Pregled postavke korisnika");
+		System.out.println("2. Unos postavki korisnika");
+		System.out.println("3. Brisanje postavki korisnika");
 		System.out.println("4. Povratak na glavni izbornik");
 		KorisnikUcitajAkciju();
 	}
@@ -245,7 +239,7 @@ public class Start {
 			korisnikIzbornik();
 		}
 		case 2 -> korisnikUnosRacuna();
-		case 3 -> provjeraRacuna();
+		case 3 -> brisanjePostavkiKorisnika();
 		case 4 -> glavniIzbornik();
 		}
 
@@ -270,7 +264,7 @@ public class Start {
 
 	}
 
-	private void provjeraRacuna() {
+	private void brisanjePostavkiKorisnika() {
 		// Pristup racunu ako je imao, ali izgubio
 
 	}
@@ -296,17 +290,7 @@ public class Start {
 				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
 		k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
 				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
-		System.out.println("---------");
-		System.out.println(k.getNadimak() + " dobrodošli u FitApp. Uživajte u korištenju FitApp-a.");
-		System.out.println("Vaše korisničko ime i loznika će Vam biti poslani na e-mail");
-		// slanjeMailaSImenomILozinkom(); // Dodati da pošalje mail s imenom i loznikom
-		System.out.println("---------");
-		korisnikIzbornik();
 		return k;
-
-	}
-
-	private void slanjeMailaSImenomILozinkom() {
 
 	}
 
@@ -499,7 +483,7 @@ public class Start {
 	}
 
 	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
-		d.setDatum(Ulaz.ucitajDatum("Unesi datum pocekta"));
+		d.setDatum(Ulaz.ucitajDatum("Unesi datum pocetka"));
 
 		pregledBazeHrane();
 		d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
@@ -531,10 +515,16 @@ public class Start {
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
 
-				System.out.println((i + 1) + "." + d.getHrana().getImeHrane() + d.getAktivnost().getImeAktivnosti());
+				
+				System.out.println("Danas ste unijeli sljedeću hranu: " + d.getHrana().getImeHrane() + " " +
+						+ d.getHrana().getKalorije() + " kcal, " + d.getHrana().getProteini() + " proteina," +
+						+ d.getHrana().getUgljikohidrati() + " ugljikohidrata," +  d.getHrana().getMasti() + " masti. " );
+				System.out.println("Danas ste obavili sljedeće aktivnosti: " + d.getAktivnost().getImeAktivnosti() + " "
+						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
 				// Nadodati ime hrane, aktivnosti, kcal itd.
 
 			}
+			
 		}
 
 	}
