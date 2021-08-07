@@ -1,15 +1,21 @@
 package fitnessapp;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Dnevnik {
 
 	private Date datum;
 	private Aktivnosti aktivnost;
 	private Hrana hrana;
-	
+	private Korisnik korisnik;
+
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
+	}
 
 	public Aktivnosti getAktivnost() {
 		return aktivnost;
@@ -34,7 +40,5 @@ public class Dnevnik {
 	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
-
-
 
 }

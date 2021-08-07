@@ -18,7 +18,7 @@ public class Start {
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
-		bazaHrane(); 
+		bazaHrane();
 
 		aktivnosti = new ArrayList<Aktivnosti>();
 		bazaAktivnosti();
@@ -26,8 +26,29 @@ public class Start {
 		datumDnevnika = new ArrayList<Dnevnik>();
 
 		korisnik = new ArrayList<Korisnik>();
+		bazaKorisnik();
 
 		glavniIzbornik();
+
+	}
+
+	private void bazaKorisnik() {
+		Korisnik k = new Korisnik();
+		korisnik.add(k);
+		
+		
+		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+
+		k.setEmail(
+				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
+						"Neispravan format"));
+		k.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
+		k.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
+				"Možete samo unijeti M za muško i F za žensko"));
+		k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
+				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
+		k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
+				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
 
 	}
 
@@ -56,6 +77,10 @@ public class Start {
 		rukomet.setImeAktivnosti("Rukomet");
 		rukomet.setPotroseneKalorijePoSatu(450);
 		aktivnosti.add(rukomet);
+
+		Aktivnosti nista = new Aktivnosti();
+		nista.setImeAktivnosti("Nema novih aktivnosti");
+		aktivnosti.add(nista);
 
 	}
 
@@ -139,6 +164,10 @@ public class Start {
 		sir.setUgljikohidrati(2);
 		sir.setMasti(27);
 		hrana.add(sir);
+
+		Hrana nista = new Hrana();
+		nista.setImeHrane("Nema nove hrane");
+		hrana.add(nista);
 
 	}
 
@@ -239,7 +268,7 @@ public class Start {
 			pregledKorisnika();
 			korisnikIzbornik();
 		}
-		case 2 -> korisnikUnosRacuna();
+		case 2 -> glavniIzbornik(); // korisnikUnosRacuna();
 		case 3 -> brisanjePostavkiKorisnika();
 		case 4 -> glavniIzbornik();
 		}
@@ -270,15 +299,15 @@ public class Start {
 
 	}
 
-	private void korisnikUnosRacuna() {
+/*	private void korisnikUnosRacuna() {
 		Korisnik k = new Korisnik();
 		k = kreirajRacun(k);
 		korisnik.add(k);
 		korisnikIzbornik();
 
 	}
-
-	private Korisnik kreirajRacun(Korisnik k) {
+*/
+/*	private Korisnik kreirajRacun(Korisnik k) {
 		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
 
 		k.setEmail(
@@ -294,7 +323,7 @@ public class Start {
 		return k;
 
 	}
-
+*/
 	private void izbornikAktivnosti() {
 		System.out.println("-----------");
 		System.out.println("1. Pregledavanje baze aktivnosti");
@@ -464,10 +493,10 @@ public class Start {
 
 	private void brisanjeHraneIliAktivnostiPoDanu() {
 		dnevnikStavke("Trenutno dostupno u aplikaciji");
-		int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti", "Niste unijeli cijeli broj",1, datumDnevnika.size());
-		datumDnevnika.remove(redniBroj-1);
+		int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti",
+				"Niste unijeli cijeli broj", 1, datumDnevnika.size());
+		datumDnevnika.remove(redniBroj - 1);
 		dnevnikIzbornik();
-		
 	}
 
 	private void dodavanjeHraneIliAktivnostiPoDanu() {
@@ -511,7 +540,6 @@ public class Start {
 
 				System.out.println(d.getAktivnost().getImeAktivnosti() + " "
 						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
-				// Nadodati ime hrane, aktivnosti, kcal itd.
 
 			}
 			System.out.println();
@@ -525,6 +553,16 @@ public class Start {
 
 			}
 
+			System.out.println();
+			System.out.println("Vaše dnevne potrebe za kalorijama su: ");
+			for (int i = 0; i < datumDnevnika.size(); i++) {
+				d = datumDnevnika.get(i);
+				Korisnik k;
+				k = korisnik.get(i);
+
+				System.out.println(k.getNadimak());
+
+			}
 		}
 
 	}
