@@ -18,7 +18,7 @@ public class Start {
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
-		bazaHrane();
+		bazaHrane(); 
 
 		aktivnosti = new ArrayList<Aktivnosti>();
 		bazaAktivnosti();
@@ -54,7 +54,7 @@ public class Start {
 
 		Aktivnosti rukomet = new Aktivnosti();
 		rukomet.setImeAktivnosti("Rukomet");
-		rukomet.setVrijemeTrajanjaUMinutama(450);
+		rukomet.setPotroseneKalorijePoSatu(450);
 		aktivnosti.add(rukomet);
 
 	}
@@ -195,7 +195,8 @@ public class Start {
 
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
 
-		switch (Ulaz.ucitajInt("Ako želite znati više upišite da, ako se želite vratiti na glavni izbornik upišite ne.",
+		switch (Ulaz.ucitajInt(
+				"Ako želite znati više upišite broj 1, ako se želite vratiti na glavni izbornik upišite broj 2.",
 				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 2)) {
 
 		case 1 -> ucitajLink();
@@ -413,12 +414,6 @@ public class Start {
 	private void pregledBazeHrane() {
 		hranaStavke("Pregled unesene hrane");
 
-		// izbornikHrane();
-		// akcijaIzbornikHrane();
-		// Pojavi se u dnevniku
-		// Treba preraditi da se vidi pregled unesene hrane, ali da se ne vidi izbornik.
-		// Kad ideš u bazu hrane pokaže ti hranu, ali ti ne pokaže akciju
-		// Kad ideš u dnevnik
 	}
 
 	private void hranaStavke(String naslov) {
@@ -468,7 +463,11 @@ public class Start {
 	}
 
 	private void brisanjeHraneIliAktivnostiPoDanu() {
-
+		dnevnikStavke("Trenutno dostupno u aplikaciji");
+		int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti", "Niste unijeli cijeli broj",1, datumDnevnika.size());
+		datumDnevnika.remove(redniBroj-1);
+		dnevnikIzbornik();
+		
 	}
 
 	private void dodavanjeHraneIliAktivnostiPoDanu() {
@@ -479,7 +478,7 @@ public class Start {
 	}
 
 	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
-		d.setDatum(Ulaz.ucitajDatum("Unesi datum pocetka"));
+		// d.setDatum(Ulaz.ucitajDatum("Unesi datum pocetka"));
 
 		pregledBazeHrane();
 		d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
@@ -506,18 +505,23 @@ public class Start {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
 			Dnevnik d;
-
+			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
-				System.out.println("Danas ste unijeli sljedeću hranu: ");
-				System.out.println(d.getHrana().getImeHrane() + " "
-						+ +d.getHrana().getKalorije() + " kcal, " + d.getHrana().getProteini() + " proteina,"
-						+ +d.getHrana().getUgljikohidrati() + " ugljikohidrata," + d.getHrana().getMasti()
-						+ " masti. ");
-				System.out.println("Danas ste obavili sljedeće aktivnosti: ");
+
 				System.out.println(d.getAktivnost().getImeAktivnosti() + " "
 						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
 				// Nadodati ime hrane, aktivnosti, kcal itd.
+
+			}
+			System.out.println();
+			System.out.println("Danas ste unijeli sljedeću hranu: ");
+			for (int i = 0; i < datumDnevnika.size(); i++) {
+				d = datumDnevnika.get(i);
+
+				System.out.println(d.getHrana().getImeHrane() + " " + +d.getHrana().getKalorije() + " kcal, "
+						+ d.getHrana().getProteini() + " proteina," + +d.getHrana().getUgljikohidrati()
+						+ " ugljikohidrata," + d.getHrana().getMasti() + " masti. ");
 
 			}
 
