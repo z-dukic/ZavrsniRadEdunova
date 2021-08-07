@@ -35,8 +35,7 @@ public class Start {
 	private void bazaKorisnik() {
 		Korisnik k = new Korisnik();
 		korisnik.add(k);
-		
-		
+
 		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
 
 		k.setEmail(
@@ -299,31 +298,31 @@ public class Start {
 
 	}
 
-/*	private void korisnikUnosRacuna() {
-		Korisnik k = new Korisnik();
-		k = kreirajRacun(k);
-		korisnik.add(k);
-		korisnikIzbornik();
-
-	}
-*/
-/*	private Korisnik kreirajRacun(Korisnik k) {
-		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
-
-		k.setEmail(
-				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
-						"Neispravan format"));
-		k.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
-		k.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
-				"Možete samo unijeti M za muško i F za žensko"));
-		k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
-				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
-		k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
-				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
-		return k;
-
-	}
-*/
+	/*
+	 * private void korisnikUnosRacuna() { Korisnik k = new Korisnik(); k =
+	 * kreirajRacun(k); korisnik.add(k); korisnikIzbornik();
+	 * 
+	 * }
+	 */
+	/*
+	 * private Korisnik kreirajRacun(Korisnik k) {
+	 * k.setNadimak(Ulaz.ucitajString("Odaberite nadimak",
+	 * "Nadimak koji ste izabrali nije moguće izabrati."));
+	 * 
+	 * k.setEmail( Ulaz.
+	 * ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu."
+	 * , "Neispravan format"));
+	 * k.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16,
+	 * 99)); k.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
+	 * "Možete samo unijeti M za muško i F za žensko"));
+	 * k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
+	 * "Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
+	 * k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
+	 * "Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+	 * return k;
+	 * 
+	 * }
+	 */
 	private void izbornikAktivnosti() {
 		System.out.println("-----------");
 		System.out.println("1. Pregledavanje baze aktivnosti");
@@ -534,15 +533,7 @@ public class Start {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
 			Dnevnik d;
-			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
-			for (int i = 0; i < datumDnevnika.size(); i++) {
-				d = datumDnevnika.get(i);
 
-				System.out.println(d.getAktivnost().getImeAktivnosti() + " "
-						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
-
-			}
-			System.out.println();
 			System.out.println("Danas ste unijeli sljedeću hranu: ");
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
@@ -552,15 +543,32 @@ public class Start {
 						+ " ugljikohidrata," + d.getHrana().getMasti() + " masti. ");
 
 			}
+			System.out.println();
+			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
+			for (int i = 0; i < datumDnevnika.size(); i++) {
+				d = datumDnevnika.get(i);
+
+				System.out.println(d.getAktivnost().getImeAktivnosti() + " "
+						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
+
+			}
 
 			System.out.println();
-			System.out.println("Vaše dnevne potrebe za kalorijama su: ");
+			System.out.print("Vaše dnevne potrebe za kalorijama su: ");
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
 				Korisnik k;
 				k = korisnik.get(i);
+				double bmr;
+				double bmr2;
+				double bmr1;
+				int bmr3;
+				bmr = 88.362 + 13.397 * k.getTezina();
+				bmr1 = 4.799 * k.getVisina();
+				bmr2 = -5.677 * k.getDob();
+				bmr3 = (int) (bmr1 + bmr2 + bmr);
 
-				System.out.println(k.getNadimak());
+				System.out.println(bmr3);
 
 			}
 		}
