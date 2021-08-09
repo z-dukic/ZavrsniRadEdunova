@@ -506,16 +506,19 @@ public class Start {
 	}
 
 	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
-		// d.setDatum(Ulaz.ucitajDatum("Unesi datum pocetka"));
+		switch (Ulaz.ucitajInt("Izaberi jedna broj od 1 do 2", "Greška", 1, 2)) {
 
-		pregledBazeHrane();
-		d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
-				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
-
-		pregledBazeAktivnosti();
-		d.setAktivnost(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
-				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
-
+		case 1 -> {
+			pregledBazeHrane();
+			d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
+					"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+		}
+		case 2 -> {
+			pregledBazeAktivnosti();
+			d.setAktivnost(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
+					"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+		}
+		}
 		return d;
 
 	}
@@ -533,15 +536,18 @@ public class Start {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
 			Dnevnik d;
-
+			
 			System.out.println("Danas ste unijeli sljedeću hranu: ");
 			for (int i = 0; i < datumDnevnika.size(); i++) {
 				d = datumDnevnika.get(i);
+				if(d.getHrana().getImeHrane()== null) {
+					glavniIzbornik();
 
 				System.out.println(d.getHrana().getImeHrane() + " " + +d.getHrana().getKalorije() + " kcal, "
 						+ d.getHrana().getProteini() + " proteina," + +d.getHrana().getUgljikohidrati()
 						+ " ugljikohidrata," + d.getHrana().getMasti() + " masti. ");
 
+				}
 			}
 			System.out.println();
 			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
@@ -555,7 +561,7 @@ public class Start {
 
 			System.out.println();
 			System.out.print("Vaše dnevne potrebe za kalorijama su: ");
-			for (int i = 0; i < datumDnevnika.size(); i++) {
+			for (int i = 0; i < korisnik.size(); i++) {
 				d = datumDnevnika.get(i);
 				Korisnik k;
 				k = korisnik.get(i);

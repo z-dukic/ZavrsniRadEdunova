@@ -2,10 +2,13 @@ package fitnessapp;
 
 import java.util.Date;
 
-public class Dnevnik {
 
+public class Dnevnik {
+	
+	
 	private Date datum;
 	private Aktivnosti aktivnost;
+	
 	private Hrana hrana;
 	private Korisnik korisnik;
 
