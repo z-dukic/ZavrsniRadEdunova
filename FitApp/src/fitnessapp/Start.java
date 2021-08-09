@@ -15,6 +15,8 @@ public class Start {
 	private List<Aktivnosti> aktivnosti;
 	private List<Korisnik> korisnik;
 	private List<Dnevnik> datumDnevnika;
+	private List<UnosKalorija> unosKcal;
+	private List<PotrosnjaKalorija> potrosnjaKcal;
 
 	public Start() {
 		hrana = new ArrayList<Hrana>();
@@ -24,6 +26,10 @@ public class Start {
 		bazaAktivnosti();
 
 		datumDnevnika = new ArrayList<Dnevnik>();
+
+		unosKcal = new ArrayList<UnosKalorija>();
+
+		potrosnjaKcal = new ArrayList<PotrosnjaKalorija>();
 
 		korisnik = new ArrayList<Korisnik>();
 		bazaKorisnik();
@@ -499,24 +505,56 @@ public class Start {
 	}
 
 	private void dodavanjeHraneIliAktivnostiPoDanu() {
+
+		switch (Ulaz.ucitajInt(
+				"Ako želite unijeti hranu unesite broj (1), ako želite unijet aktivnost unesite broj (2) ",
+				"Možete samo unijeti (1) za unos hrane i (2) za unos aktivnosti", 1, 2)) {
+
+		case 1 -> {
+			UnosKalorija uk = new UnosKalorija();
+			uk = unosKalorijaPostaviVrijednosti(uk);
+			unosKcal.add(uk);
+			dnevnikIzbornik();
+		}
+
+		case 2 -> {
+			PotrosnjaKalorija pk = new PotrosnjaKalorija();
+			pk = potrosnjaKalorijaPostaviVrijednosti(pk);
+			potrosnjaKcal.add(pk);
+			dnevnikIzbornik();
+
+		}
+
+		}
 		Dnevnik d = new Dnevnik();
 		d = dnevnikPostaviVrijednosti(d);
 		datumDnevnika.add(d);
 		dnevnikIzbornik();
+
+	}
+
+	private PotrosnjaKalorija potrosnjaKalorijaPostaviVrijednosti(PotrosnjaKalorija pk) {
+		pregledBazeAktivnosti();
+		pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
+				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+		return pk;
+	}
+
+	private UnosKalorija unosKalorijaPostaviVrijednosti(UnosKalorija uk) {
+		pregledBazeHrane();
+		uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
+				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+		return uk;
 	}
 
 	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
 		switch (Ulaz.ucitajInt("Izaberi jedna broj od 1 do 2", "Greška", 1, 2)) {
 
 		case 1 -> {
-			pregledBazeHrane();
-			d.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
-					"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+
 		}
 		case 2 -> {
-			pregledBazeAktivnosti();
-			d.setAktivnost(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
-					"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+
 		}
 		}
 		return d;
@@ -532,37 +570,48 @@ public class Start {
 	private void dnevnikStavke(String naslov) {
 		System.out.println(naslov);
 		System.out.println("-------------------");
-		if (datumDnevnika.isEmpty()) {
+		if (unosKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
-			Dnevnik d;
 			
+			UnosKalorija uk;
+
 			System.out.println("Danas ste unijeli sljedeću hranu: ");
-			for (int i = 0; i < datumDnevnika.size(); i++) {
-				d = datumDnevnika.get(i);
-				if(d.getHrana().getImeHrane()== null) {
-					glavniIzbornik();
+			for (int i = 0; i < unosKcal.size(); i++) {
+				uk = unosKcal.get(i);
 
-				System.out.println(d.getHrana().getImeHrane() + " " + +d.getHrana().getKalorije() + " kcal, "
-						+ d.getHrana().getProteini() + " proteina," + +d.getHrana().getUgljikohidrati()
-						+ " ugljikohidrata," + d.getHrana().getMasti() + " masti. ");
+				System.out.println(uk.getHrana().getImeHrane() + " " + +uk.getHrana().getKalorije() + " kcal, "
+						+ uk.getHrana().getProteini() + " proteina," + +uk.getHrana().getUgljikohidrati()
+						+ " ugljikohidrata," + uk.getHrana().getMasti() + " masti. ");
 
-				}
 			}
+		}
+
+		if (potrosnjaKcal.isEmpty()) {
+			System.out.println("Trenutno nema unosa na Vašem računu");
+		} else {
+
 			System.out.println();
 			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
-			for (int i = 0; i < datumDnevnika.size(); i++) {
-				d = datumDnevnika.get(i);
+			PotrosnjaKalorija pk;
+			for (int i = 0; i < potrosnjaKcal.size(); i++) {
+				pk = potrosnjaKcal.get(i);
 
-				System.out.println(d.getAktivnost().getImeAktivnosti() + " "
-						+ d.getAktivnost().getPotroseneKalorijePoSatu() + " - kcal ");
+				System.out.println(pk.getAktivnosti().getImeAktivnosti() + " "
+						+ pk.getAktivnosti().getPotroseneKalorijePoSatu() + " - kcal ");
 
 			}
 
+		}
+		
+		if(korisnik.isEmpty()) {
+			System.out.println("Trenutno nema unosa na Vašem računu");
+		}else {
+			
 			System.out.println();
 			System.out.print("Vaše dnevne potrebe za kalorijama su: ");
 			for (int i = 0; i < korisnik.size(); i++) {
-				d = datumDnevnika.get(i);
+				
 				Korisnik k;
 				k = korisnik.get(i);
 				double bmr;
@@ -575,11 +624,16 @@ public class Start {
 				bmr3 = (int) (bmr1 + bmr2 + bmr);
 
 				System.out.println(bmr3);
-
-			}
+			
+			
 		}
 
+
+
+		}
 	}
+
+	
 
 	/*
 	 * private void izbornikDatuma() { LocalDate danas = LocalDate.now(); String
