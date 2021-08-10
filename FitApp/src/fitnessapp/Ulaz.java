@@ -8,24 +8,20 @@ public class Ulaz {
 
 	public static Scanner scanner = new Scanner(System.in);
 
-	public static String ucitajSpol(String poruka, String greska) {
-		String spolString = "";
+	public static boolean ucitajSpol(String poruka) {
+		String izjava;
 
 		while (true) {
 			System.out.println(poruka);
-			try {
-				spolString = scanner.nextLine().trim().toLowerCase();
-				if (spolString.equals("M") || spolString.equals("F")) {
-					System.out.println("Možete odgovoriti samo sa M(Muško) ili F(Žensko)");
-					continue;
-				}
-				break;
-			} catch (Exception e) {
-				System.out.println(greska);
+			izjava = scanner.nextLine();
+			if (izjava.trim().toLowerCase().equals("m")) {
+				return true;
 			}
+			if (izjava.trim().toLowerCase().equals("f")) {
+				return false;
+			}
+			System.out.println("Možete unijeti samo M za muški spol ili F za ženski spol (unos da/ne)");
 		}
-
-		return spolString;
 	}
 
 	public static int ucitajInt(String poruka, String greska, int min, int max) {

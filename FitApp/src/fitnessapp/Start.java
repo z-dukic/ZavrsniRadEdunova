@@ -48,8 +48,7 @@ public class Start {
 				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
 						"Neispravan format"));
 		k.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16, 99));
-		k.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
-				"Možete samo unijeti M za muško i F za žensko"));
+		k.setSpol(Ulaz.ucitajSpol("Unesite svoj spol. Za muški spol upišite \"M\" ili za ženski spol \"F\" "));
 		k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
 				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
 		k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
@@ -497,17 +496,36 @@ public class Start {
 	}
 
 	private void brisanjeHraneIliAktivnostiPoDanu() {
-		dnevnikStavke("Trenutno dostupno u aplikaciji");
-		int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti",
-				"Niste unijeli cijeli broj", 1, datumDnevnika.size());
-		datumDnevnika.remove(redniBroj - 1);
-		dnevnikIzbornik();
+
+		switch (Ulaz.ucitajInt(
+				"Ako želite izbrisati unesenu hranu unesite broj (1), ako želite obrisati aktivnost iz dnevnika upišite (2)",
+				"Možete samo unijeti (1) za brisanje unesene hrane ili (2) za brisanje unesene aktivnosti", 1, 2)) {
+
+		case 1 -> {
+			dnevnikStavke("Trenutno dostupno u aplikaciji");
+			int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti",
+					"Niste unijeli cijeli broj", 1, unosKcal.size());
+			unosKcal.remove(redniBroj - 1);
+			dnevnikIzbornik();
+		}
+
+		case 2 -> {
+
+			dnevnikStavke("Trenutno dostupno u aplikaciji");
+			int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti",
+					"Niste unijeli cijeli broj", 1, potrosnjaKcal.size());
+			potrosnjaKcal.remove(redniBroj - 1);
+			dnevnikIzbornik();
+		}
+
+		}
+
 	}
 
 	private void dodavanjeHraneIliAktivnostiPoDanu() {
 
 		switch (Ulaz.ucitajInt(
-				"Ako želite unijeti hranu unesite broj (1), ako želite unijet aktivnost unesite broj (2) ",
+				"Ako želite unijeti hranu unesite broj (1), ako želite unijeti aktivnost unesite broj (2) ",
 				"Možete samo unijeti (1) za unos hrane i (2) za unos aktivnosti", 1, 2)) {
 
 		case 1 -> {
@@ -526,10 +544,6 @@ public class Start {
 		}
 
 		}
-		Dnevnik d = new Dnevnik();
-		d = dnevnikPostaviVrijednosti(d);
-		datumDnevnika.add(d);
-		dnevnikIzbornik();
 
 	}
 
@@ -547,20 +561,6 @@ public class Start {
 		return uk;
 	}
 
-	private Dnevnik dnevnikPostaviVrijednosti(Dnevnik d) {
-		switch (Ulaz.ucitajInt("Izaberi jedna broj od 1 do 2", "Greška", 1, 2)) {
-
-		case 1 -> {
-
-		}
-		case 2 -> {
-
-		}
-		}
-		return d;
-
-	}
-
 	private void dnevnikPregled() {
 		dnevnikStavke("Pregled unosa po danima");
 		dnevnikIzbornik();
@@ -573,7 +573,7 @@ public class Start {
 		if (unosKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
-			
+
 			UnosKalorija uk;
 
 			System.out.println("Danas ste unijeli sljedeću hranu: ");
@@ -603,15 +603,15 @@ public class Start {
 			}
 
 		}
-		
-		if(korisnik.isEmpty()) {
+
+		if (korisnik.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
-		}else {
-			
+		} else {
+
 			System.out.println();
 			System.out.print("Vaše dnevne potrebe za kalorijama su: ");
 			for (int i = 0; i < korisnik.size(); i++) {
-				
+
 				Korisnik k;
 				k = korisnik.get(i);
 				double bmr;
@@ -624,16 +624,12 @@ public class Start {
 				bmr3 = (int) (bmr1 + bmr2 + bmr);
 
 				System.out.println(bmr3);
-			
-			
-		}
 
-
+			}
 
 		}
+
 	}
-
-	
 
 	/*
 	 * private void izbornikDatuma() { LocalDate danas = LocalDate.now(); String
