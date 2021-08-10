@@ -8,9 +8,17 @@ public class Korisnik {
 	private String email;
 	private int visina;
 	private int tezina;
+	private int zeljenaTezina;
 	private int dob;
 	private boolean spol;
 
+	public int getZeljenaTezina() {
+		return zeljenaTezina;
+	}
+
+	public void setZeljenaTezina(int zeljenaTezina) {
+		this.zeljenaTezina = zeljenaTezina;
+	}
 
 	public boolean isSpol() {
 		return spol;
@@ -44,10 +52,6 @@ public class Korisnik {
 		this.tezina = tezina;
 	}
 
-	
-
-	
-
 	public int getSifra() {
 		return sifra;
 	}
@@ -80,5 +84,4 @@ public class Korisnik {
 		this.dob = dob;
 	}
 
-	
 }

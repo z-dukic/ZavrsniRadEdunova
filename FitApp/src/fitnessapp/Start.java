@@ -17,8 +17,22 @@ public class Start {
 	private List<Dnevnik> datumDnevnika;
 	private List<UnosKalorija> unosKcal;
 	private List<PotrosnjaKalorija> potrosnjaKcal;
+	
+	
 
 	public Start() {
+		System.out.println(
+				" __          __  _                            _          ______ _ _                          \r\n"
+						+ " \\ \\        / / | |                          | |        |  ____(_) |       /\\                \r\n"
+						+ "  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |_ ___   | |__   _| |_     /  \\   _ __  _ __  \r\n"
+						+ "   \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | __/ _ \\  |  __| | | __|   / /\\ \\ | '_ \\| '_ \\ \r\n"
+						+ "    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | |    | | |_   / ____ \\| |_) | |_) |\r\n"
+						+ "     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|  \\__\\___/  |_|    |_|\\__| /_/    \\_\\ .__/| .__/ \r\n"
+						+ "                                                                                | |   | |    \r\n"
+						+ "                                                                                |_|   |_|   ");
+
+		System.out.println("----------------------");
+
 		hrana = new ArrayList<Hrana>();
 		bazaHrane();
 
@@ -43,7 +57,6 @@ public class Start {
 		korisnik.add(k);
 
 		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
-
 		k.setEmail(
 				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
 						"Neispravan format"));
@@ -52,6 +65,8 @@ public class Start {
 		k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
 				"Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
 		k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
+				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+		k.setZeljenaTezina(Ulaz.ucitajInt("Unesite svoju željenu težinu u kilogramima",
 				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
 
 	}
@@ -570,9 +585,7 @@ public class Start {
 	private void dnevnikStavke(String naslov) {
 		System.out.println(naslov);
 		System.out.println("-------------------");
-		
 
-		
 		if (unosKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
@@ -589,8 +602,7 @@ public class Start {
 
 			}
 		}
-		
-		
+
 		if (potrosnjaKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
@@ -607,7 +619,7 @@ public class Start {
 			}
 
 		}
-
+		int basicMetablicRate = 0;
 		if (korisnik.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
@@ -621,29 +633,30 @@ public class Start {
 				double bmr;
 				double bmr2;
 				double bmr1;
-				int bmr3;
+				
 				bmr = 88.362 + 13.397 * k.getTezina();
 				bmr1 = 4.799 * k.getVisina();
 				bmr2 = -5.677 * k.getDob();
-				bmr3 = (int) (bmr1 + bmr2 + bmr);
+				basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
 
-				System.out.println(bmr3); //ovo je dobro, preimenovat
-
-			}
-			int suma1 = 0;
-			for (int i = 0; i < unosKcal.size(); i++) {
-				UnosKalorija uk;
-				uk = unosKcal.get(i);
-
-				int suma;
+				System.out.println(basicMetablicRate);
 				
-				suma = +uk.getHrana().getKalorije();
-				suma1 = suma + suma;
-
 				
+			} // Ne radi kako treba. Ne prikazuje dva objekta kako treba.
+	//		int kolikoJeDosadUnesenoKalorija = 0;
+		//	for (int i = 0; i < unosKcal.size(); i++) {
+			//	UnosKalorija uk;
+			//	uk = unosKcal.get(i);
 
-			}
-			System.out.println("Dosad ste unijeli: " + suma1 + " kcal."); //ovo je dobro, preimenovat
+			//	int sumaPojedineKalorije;
+
+		///		sumaPojedineKalorije = +uk.getHrana().getKalorije();
+		//		kolikoJeDosadUnesenoKalorija = sumaPojedineKalorije + sumaPojedineKalorije;
+
+		//	}
+		//	System.out.println("Dosad ste unijeli: " + kolikoJeDosadUnesenoKalorija + " kcal.");
+		//	
+			
 
 		}
 
