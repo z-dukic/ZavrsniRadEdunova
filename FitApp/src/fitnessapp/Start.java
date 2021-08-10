@@ -570,6 +570,9 @@ public class Start {
 	private void dnevnikStavke(String naslov) {
 		System.out.println(naslov);
 		System.out.println("-------------------");
+		
+
+		
 		if (unosKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
@@ -586,7 +589,8 @@ public class Start {
 
 			}
 		}
-
+		
+		
 		if (potrosnjaKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
@@ -623,9 +627,23 @@ public class Start {
 				bmr2 = -5.677 * k.getDob();
 				bmr3 = (int) (bmr1 + bmr2 + bmr);
 
-				System.out.println(bmr3);
+				System.out.println(bmr3); //ovo je dobro, preimenovat
 
 			}
+			int suma1 = 0;
+			for (int i = 0; i < unosKcal.size(); i++) {
+				UnosKalorija uk;
+				uk = unosKcal.get(i);
+
+				int suma;
+				
+				suma = +uk.getHrana().getKalorije();
+				suma1 = suma + suma;
+
+				
+
+			}
+			System.out.println("Dosad ste unijeli: " + suma1 + " kcal."); //ovo je dobro, preimenovat
 
 		}
 
