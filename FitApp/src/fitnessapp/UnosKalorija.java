@@ -3,10 +3,19 @@ package fitnessapp;
 import java.util.Date;
 
 public class UnosKalorija {
-	
+
 	public Korisnik korisnik;
 	public Date datum;
 	public Hrana hrana;
+	public double kolicinaHrane;
+
+	public double getKolicinaHrane() {
+		return kolicinaHrane;
+	}
+
+	public void setKolicinaHrane(double kolicinaHrane) {
+		this.kolicinaHrane = kolicinaHrane;
+	}
 
 	public Korisnik getKorisnik() {
 		return korisnik;

@@ -7,6 +7,18 @@ public class PotrosnjaKalorija {
 	public Korisnik korisnik;
 	public Date datum;
 	public Aktivnosti aktivnosti;
+	public double trajanjeAktivnosti;
+
+
+	
+
+	public double getTrajanjeAktivnosti() {
+		return trajanjeAktivnosti;
+	}
+
+	public void setTrajanjeAktivnosti(double trajanjeAktivnosti) {
+		this.trajanjeAktivnosti = trajanjeAktivnosti;
+	}
 
 	public Aktivnosti getAktivnosti() {
 		return aktivnosti;

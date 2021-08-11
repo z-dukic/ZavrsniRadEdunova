@@ -3,7 +3,8 @@ package fitnessapp;
 import java.awt.Desktop;
 import java.net.URI;
 import java.util.ArrayList;
-
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import java.util.Scanner;
@@ -17,8 +18,6 @@ public class Start {
 	private List<Dnevnik> datumDnevnika;
 	private List<UnosKalorija> unosKcal;
 	private List<PotrosnjaKalorija> potrosnjaKcal;
-	
-	
 
 	public Start() {
 		System.out.println(
@@ -96,10 +95,6 @@ public class Start {
 		rukomet.setImeAktivnosti("Rukomet");
 		rukomet.setPotroseneKalorijePoSatu(450);
 		aktivnosti.add(rukomet);
-
-		Aktivnosti nista = new Aktivnosti();
-		nista.setImeAktivnosti("Nema novih aktivnosti");
-		aktivnosti.add(nista);
 
 	}
 
@@ -183,10 +178,6 @@ public class Start {
 		sir.setUgljikohidrati(2);
 		sir.setMasti(27);
 		hrana.add(sir);
-
-		Hrana nista = new Hrana();
-		nista.setImeHrane("Nema nove hrane");
-		hrana.add(nista);
 
 	}
 
@@ -508,6 +499,11 @@ public class Start {
 
 	private void pregledStatistike() {
 
+		Ulaz send = new Ulaz("zorandjukic.os@gmail.com", "subject", "body" + aktivnosti.size());
+		// change receiver email
+
+		dnevnikIzbornik();
+
 	}
 
 	private void brisanjeHraneIliAktivnostiPoDanu() {
@@ -564,15 +560,23 @@ public class Start {
 
 	private PotrosnjaKalorija potrosnjaKalorijaPostaviVrijednosti(PotrosnjaKalorija pk) {
 		pregledBazeAktivnosti();
+
 		pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+		pk.setTrajanjeAktivnosti(
+				Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
+
 		return pk;
 	}
 
 	private UnosKalorija unosKalorijaPostaviVrijednosti(UnosKalorija uk) {
 		pregledBazeHrane();
+
+		uk.setKolicinaHrane(Ulaz.ucitajInt(null, null, 0, 0));
 		uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+		uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
+				"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
 		return uk;
 	}
 
@@ -586,7 +590,7 @@ public class Start {
 		System.out.println(naslov);
 		System.out.println("-------------------");
 
-		if (unosKcal.isEmpty()) {
+		if (unosKcal.isEmpty() || potrosnjaKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
 		} else {
 
@@ -596,9 +600,11 @@ public class Start {
 			for (int i = 0; i < unosKcal.size(); i++) {
 				uk = unosKcal.get(i);
 
-				System.out.println(uk.getHrana().getImeHrane() + " " + +uk.getHrana().getKalorije() + " kcal, "
-						+ uk.getHrana().getProteini() + " proteina," + +uk.getHrana().getUgljikohidrati()
-						+ " ugljikohidrata," + uk.getHrana().getMasti() + " masti. ");
+				System.out.println(
+						uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) + uk.getHrana().getKalorije()
+								+ " kcal, " + (uk.getKolicinaHrane() / 100) + uk.getHrana().getProteini() + " proteina,"
+								+ (uk.getKolicinaHrane() / 100) + uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
+								+ (uk.getKolicinaHrane() / 100) + uk.getHrana().getMasti() + " masti. ");
 
 			}
 		}
@@ -614,7 +620,8 @@ public class Start {
 				pk = potrosnjaKcal.get(i);
 
 				System.out.println(pk.getAktivnosti().getImeAktivnosti() + " "
-						+ pk.getAktivnosti().getPotroseneKalorijePoSatu() + " - kcal ");
+						+ (pk.getTrajanjeAktivnosti() / 60) * (pk.getAktivnosti().getPotroseneKalorijePoSatu())
+						+ " - kcal ");
 
 			}
 
@@ -633,30 +640,29 @@ public class Start {
 				double bmr;
 				double bmr2;
 				double bmr1;
-				
+
 				bmr = 88.362 + 13.397 * k.getTezina();
 				bmr1 = 4.799 * k.getVisina();
 				bmr2 = -5.677 * k.getDob();
 				basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
 
 				System.out.println(basicMetablicRate);
-				
-				
+
 			} // Ne radi kako treba. Ne prikazuje dva objekta kako treba.
-	//		int kolikoJeDosadUnesenoKalorija = 0;
-		//	for (int i = 0; i < unosKcal.size(); i++) {
-			//	UnosKalorija uk;
-			//	uk = unosKcal.get(i);
+				// int kolikoJeDosadUnesenoKalorija = 0;
+				// for (int i = 0; i < unosKcal.size(); i++) {
+				// UnosKalorija uk;
+				// uk = unosKcal.get(i);
 
-			//	int sumaPojedineKalorije;
+			// int sumaPojedineKalorije;
 
-		///		sumaPojedineKalorije = +uk.getHrana().getKalorije();
-		//		kolikoJeDosadUnesenoKalorija = sumaPojedineKalorije + sumaPojedineKalorije;
+			/// sumaPojedineKalorije = +uk.getHrana().getKalorije();
+			// kolikoJeDosadUnesenoKalorija = sumaPojedineKalorije + sumaPojedineKalorije;
 
-		//	}
-		//	System.out.println("Dosad ste unijeli: " + kolikoJeDosadUnesenoKalorija + " kcal.");
-		//	
-			
+			// }
+			// System.out.println("Dosad ste unijeli: " + kolikoJeDosadUnesenoKalorija + "
+			// kcal.");
+			//
 
 		}
 
@@ -677,10 +683,9 @@ public class Start {
 	 * 
 	 * }
 	 */
-	
-
 
 	public static void main(String[] args) {
+
 		new Start();
 
 	}
