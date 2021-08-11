@@ -51,6 +51,7 @@ public class Start {
 
 	}
 
+	// Dodavanje novog korisnika
 	private void bazaKorisnik() {
 		Korisnik k = new Korisnik();
 		korisnik.add(k);
@@ -70,6 +71,7 @@ public class Start {
 
 	}
 
+	// Aktivnosti koje su mogu birati
 	private void bazaAktivnosti() {
 		Aktivnosti trcanje = new Aktivnosti();
 		trcanje.setImeAktivnosti("Trcanje");
@@ -98,6 +100,7 @@ public class Start {
 
 	}
 
+	// Hrana koja se može birati
 	private void bazaHrane() {
 		Hrana mrkva = new Hrana();
 		mrkva.setImeHrane("Mrkva");
@@ -181,6 +184,7 @@ public class Start {
 
 	}
 
+	// Glavni izbornik
 	private void glavniIzbornik() {
 		System.out.println("****FitApp****");
 		System.out.println("Izbornik");
@@ -207,6 +211,7 @@ public class Start {
 
 	}
 
+	// Izlaz iz aplikacije
 	private void izlazIzAplikacije() {
 
 		System.out.println("Dali želite izađi iz aplikacije? (Da/Ne)");
@@ -230,6 +235,7 @@ public class Start {
 
 	}
 
+	// Šalje na GitHub gdje se vide podaci o FitAppu
 	private void oNamaIzbornik() {
 
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
@@ -244,6 +250,7 @@ public class Start {
 
 	}
 
+	// Učitava link na GitHub
 	private void ucitajLink() {
 		try {
 			Desktop desktop = java.awt.Desktop.getDesktop();
@@ -261,6 +268,7 @@ public class Start {
 
 	}
 
+	// Izbornik sa korisnika; Dodati mogućnost promjene korisnika
 	private void korisnikIzbornik() {
 		System.out.println("---------------");
 		System.out.println("Postavke korisnika");
@@ -285,6 +293,7 @@ public class Start {
 
 	}
 
+	// Pregled svih računa
 	private void pregledKorisnika() {
 		pristupRacunuStavke("Pregled svih računa");
 	}
@@ -334,6 +343,9 @@ public class Start {
 	 * 
 	 * }
 	 */
+
+	// Izbornik aktivnosti gdje se mogu pregledati aktivnosti, dodati nove, obrisati
+	// stare itd.
 	private void izbornikAktivnosti() {
 		System.out.println("-----------");
 		System.out.println("1. Pregledavanje baze aktivnosti");
@@ -353,6 +365,7 @@ public class Start {
 
 	}
 
+	// Brisanje aktivnosti
 	private void brisanjeAktivnostiIzBaze() {
 		aktivnostiStavke("Pregled unesenih aktivnosti");
 		int brojAktivnosti = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1,
@@ -361,6 +374,7 @@ public class Start {
 		izbornikAktivnosti();
 	}
 
+	// Dodavanje novih aktivnosti
 	private void dodavanjeAktivnostiUBazu() {
 
 		Aktivnosti a = new Aktivnosti();
@@ -371,6 +385,7 @@ public class Start {
 
 	}
 
+	// Postavljanje vrijednosti novih aktivnosti
 	private Aktivnosti aktivnostiPostaviVrijednosti(Aktivnosti a) {
 		a.setImeAktivnosti(Ulaz.ucitajString("Unesite ime aktivnosti", "Niste unijeli ime aktivnosti"));
 		a.setPotroseneKalorijePoSatu(
@@ -378,8 +393,15 @@ public class Start {
 		return a;
 	}
 
+	// Pregled svih aktivnosti koji su trenutno u bazi bez vraćanja na izbornik
+	private void pregledBazeAktivnostiZaDnevnik() {
+		aktivnostiStavke("Pregled unesenih aktivnosti");
+	}
+
+	// Pregled svih aktivnosti koji su trenutno u bazi uz vraćanje na izbornik
 	private void pregledBazeAktivnosti() {
 		aktivnostiStavke("Pregled unesenih aktivnosti");
+		izbornikAktivnosti();
 
 	}
 
@@ -400,6 +422,7 @@ public class Start {
 
 	}
 
+	// Izbornik hrane; Dodavanje hrane u bazu, brisanje hrane iz baze, pregled.
 	private void izbornikHrane() {
 		System.out.println("-------------");
 		System.out.println("1. Pregled baze hrane");
@@ -421,6 +444,7 @@ public class Start {
 
 	}
 
+	// Dodavanje hrane u bazu
 	private void dodavanjeHraneUBazu() {
 
 		Hrana h = new Hrana();
@@ -431,6 +455,7 @@ public class Start {
 
 	}
 
+	// Dodavanje vrijednosti hranu u bazi
 	private Hrana hranaPostaviVrijednost(Hrana h) {
 
 		h.setImeHrane(Ulaz.ucitajString("Kako se hrana zove", "Niste unijeli ime hrane"));
@@ -442,6 +467,7 @@ public class Start {
 		return h;
 	}
 
+	// Brisanje hrane iz baze
 	private void brisanjeHraneIzBaze() {
 		hranaStavke("Trenutno dostupno u aplikaciji");
 		int brojHrane = Ulaz.ucitajInt("Odaberite redni broj za brisanje", "Niste unijeli cijeli broj", 1,
@@ -450,11 +476,18 @@ public class Start {
 		izbornikHrane();
 	}
 
-	private void pregledBazeHrane() {
+	// Pregled baze, ali bez vraćanja na izbornik
+	private void pregledBazeHraneZaDnevnik() {
 		hranaStavke("Pregled unesene hrane");
-
 	}
 
+	// Pregled baze, ali uz vraćanje na izbornik
+	private void pregledBazeHrane() {
+		hranaStavke("Pregled unesene hrane");
+		izbornikHrane();
+	}
+
+	// Prikaz hrane u bazi
 	private void hranaStavke(String naslov) {
 		System.out.println("--------------");
 
@@ -471,7 +504,7 @@ public class Start {
 				System.out.println((i + 1) + ". " + h.getImeHrane());
 			}
 		}
-
+		// izbornikHrane();
 	}
 
 	private void dnevnikIzbornik() {
@@ -559,20 +592,21 @@ public class Start {
 	}
 
 	private PotrosnjaKalorija potrosnjaKalorijaPostaviVrijednosti(PotrosnjaKalorija pk) {
-		pregledBazeAktivnosti();
-
+		pregledBazeAktivnostiZaDnevnik();
+		System.out.println();
 		pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+		System.out.println();
 		pk.setTrajanjeAktivnosti(
 				Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
 
 		return pk;
 	}
 
+	// Unos kalorija za dnevnik
 	private UnosKalorija unosKalorijaPostaviVrijednosti(UnosKalorija uk) {
-		pregledBazeHrane();
+		pregledBazeHraneZaDnevnik();
 
-		uk.setKolicinaHrane(Ulaz.ucitajInt(null, null, 0, 0));
 		uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
 		uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
@@ -580,39 +614,46 @@ public class Start {
 		return uk;
 	}
 
+	// Pregled hrane koja je pojedena
 	private void dnevnikPregled() {
 		dnevnikStavke("Pregled unosa po danima");
 		dnevnikIzbornik();
 
 	}
 
+	// Pregled sve hrane, aktivnosti i korisnika koja je korištena
 	private void dnevnikStavke(String naslov) {
 		System.out.println(naslov);
 		System.out.println("-------------------");
 
-		if (unosKcal.isEmpty() || potrosnjaKcal.isEmpty()) {
-			System.out.println("Trenutno nema unosa na Vašem računu");
+		if (unosKcal.isEmpty()) {
+			System.out.println("Trenutno nema unosa hrane na Vašem računu");
 		} else {
 
 			UnosKalorija uk;
 
 			System.out.println("Danas ste unijeli sljedeću hranu: ");
 			for (int i = 0; i < unosKcal.size(); i++) {
+				
+				// Hrana koja je unesena
 				uk = unosKcal.get(i);
 
 				System.out.println(
-						uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) + uk.getHrana().getKalorije()
-								+ " kcal, " + (uk.getKolicinaHrane() / 100) + uk.getHrana().getProteini() + " proteina,"
-								+ (uk.getKolicinaHrane() / 100) + uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
-								+ (uk.getKolicinaHrane() / 100) + uk.getHrana().getMasti() + " masti. ");
+						uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
+								+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
+								+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
+								+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
 
 			}
+
+			System.out.println();
 		}
 
 		if (potrosnjaKcal.isEmpty()) {
-			System.out.println("Trenutno nema unosa na Vašem računu");
+			System.out.println("Trenutno nema aktivnosti na Vašem računu");
 		} else {
-
+			
+			// Aktivnosti koje su unesene
 			System.out.println();
 			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
 			PotrosnjaKalorija pk;
@@ -626,6 +667,8 @@ public class Start {
 			}
 
 		}
+		
+		// BMR je koliko hrane čovjek troši samo da održava vitalne funkcije
 		int basicMetablicRate = 0;
 		if (korisnik.isEmpty()) {
 			System.out.println("Trenutno nema unosa na Vašem računu");
