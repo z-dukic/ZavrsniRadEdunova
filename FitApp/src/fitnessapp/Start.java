@@ -3,11 +3,12 @@ package fitnessapp;
 import java.awt.Desktop;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
 import java.util.Scanner;
+
+
+
 
 public class Start {
 
@@ -46,7 +47,8 @@ public class Start {
 
 		korisnik = new ArrayList<Korisnik>();
 		bazaKorisnik();
-
+		
+		
 		glavniIzbornik();
 
 	}
@@ -55,8 +57,10 @@ public class Start {
 	private void bazaKorisnik() {
 		Korisnik k = new Korisnik();
 		korisnik.add(k);
+		
+		
 
-		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+		k.setNadimak (Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
 		k.setEmail(
 				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
 						"Neispravan format"));
@@ -594,6 +598,7 @@ public class Start {
 	private PotrosnjaKalorija potrosnjaKalorijaPostaviVrijednosti(PotrosnjaKalorija pk) {
 		pregledBazeAktivnostiZaDnevnik();
 		System.out.println();
+		pk.setDatum(Ulaz.ucitajDatum("Unesite datum kad ste konzumirali hranu."));
 		pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
 		System.out.println();
@@ -607,6 +612,7 @@ public class Start {
 	private UnosKalorija unosKalorijaPostaviVrijednosti(UnosKalorija uk) {
 		pregledBazeHraneZaDnevnik();
 
+		uk.setDatum(Ulaz.ucitajDatum("Unesite datum kada ste napravili aktivnost"));
 		uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
 				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
 		uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
@@ -626,6 +632,8 @@ public class Start {
 		System.out.println(naslov);
 		System.out.println("-------------------");
 
+		
+		
 		if (unosKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa hrane na Vašem računu");
 		} else {
@@ -634,15 +642,32 @@ public class Start {
 
 			System.out.println("Danas ste unijeli sljedeću hranu: ");
 			for (int i = 0; i < unosKcal.size(); i++) {
-				
+
 				// Hrana koja je unesena
 				uk = unosKcal.get(i);
+				
+				System.out.println("Datum 1" + uk.getDatum());
+				
+				if(uk.getDatum().compareTo(uk.getDatum())==0) {
+					System.out.println("Print 1");
+					System.out.println(
+							uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
+									+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
+									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
+									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
+					
+				}else {
+					System.out.println("Print 2");
+					System.out.println(
+							uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
+									+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
+									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
+									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
+					
+					
+				}
 
-				System.out.println(
-						uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
-								+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
-								+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
-								+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
+
 
 			}
 
@@ -652,7 +677,7 @@ public class Start {
 		if (potrosnjaKcal.isEmpty()) {
 			System.out.println("Trenutno nema aktivnosti na Vašem računu");
 		} else {
-			
+
 			// Aktivnosti koje su unesene
 			System.out.println();
 			System.out.println("Danas ste obavili sljedeće aktivnosti: ");
@@ -667,7 +692,7 @@ public class Start {
 			}
 
 		}
-		
+
 		// BMR je koliko hrane čovjek troši samo da održava vitalne funkcije
 		int basicMetablicRate = 0;
 		if (korisnik.isEmpty()) {
@@ -691,21 +716,29 @@ public class Start {
 
 				System.out.println(basicMetablicRate);
 
-			} // Ne radi kako treba. Ne prikazuje dva objekta kako treba.
-				// int kolikoJeDosadUnesenoKalorija = 0;
-				// for (int i = 0; i < unosKcal.size(); i++) {
-				// UnosKalorija uk;
-				// uk = unosKcal.get(i);
-
-			// int sumaPojedineKalorije;
-
-			/// sumaPojedineKalorije = +uk.getHrana().getKalorije();
-			// kolikoJeDosadUnesenoKalorija = sumaPojedineKalorije + sumaPojedineKalorije;
-
-			// }
-			// System.out.println("Dosad ste unijeli: " + kolikoJeDosadUnesenoKalorija + "
-			// kcal.");
-			//
+				
+			}
+			int kolikoJeDosadUnesenoKalorija = 0;
+			for (UnosKalorija uk : unosKcal) {
+				kolikoJeDosadUnesenoKalorija += (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije();
+			}
+			
+			//Koliko je dosad unio kalorija kroz hranu
+			System.out.println("Dosad ste unijeli: " + kolikoJeDosadUnesenoKalorija + " kcal.");
+			
+			int kolikoJeDosadPotrosenoKalorija = 0;
+			for (PotrosnjaKalorija pk : potrosnjaKcal) {
+				kolikoJeDosadPotrosenoKalorija += (pk.getTrajanjeAktivnosti()/100)*pk.getAktivnosti().getPotroseneKalorijePoSatu();
+			}
+			
+			//Koliko je dosad potrošio kalorija kroz aktivnosti
+			System.out.println("Dosad ste potrošili: " + kolikoJeDosadPotrosenoKalorija + " kcal.");
+			
+			int razlikaIzmeduUnesenihKcalIPotrosenihKcal= kolikoJeDosadUnesenoKalorija - kolikoJeDosadPotrosenoKalorija;
+			
+			// Koliko je korisniku ostalo kalorija u dnevnoj prehrani. Ako pojede više neće smršaviti.
+			System.out.println("Danas Vam je ostalo još: " + razlikaIzmeduUnesenihKcalIPotrosenihKcal + " kcal");
+			
 
 		}
 
