@@ -2,13 +2,15 @@ package fitnessapp;
 
 import java.awt.Desktop;
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
-
-
-
+import java.util.concurrent.TimeUnit;
 
 public class Start {
 
@@ -19,8 +21,11 @@ public class Start {
 	private List<Dnevnik> datumDnevnika;
 	private List<UnosKalorija> unosKcal;
 	private List<PotrosnjaKalorija> potrosnjaKcal;
+	
+
 
 	public Start() {
+		datumBaza();
 		System.out.println(
 				" __          __  _                            _          ______ _ _                          \r\n"
 						+ " \\ \\        / / | |                          | |        |  ____(_) |       /\\                \r\n"
@@ -40,6 +45,7 @@ public class Start {
 		bazaAktivnosti();
 
 		datumDnevnika = new ArrayList<Dnevnik>();
+		datumBaza();
 
 		unosKcal = new ArrayList<UnosKalorija>();
 
@@ -49,18 +55,54 @@ public class Start {
 		bazaKorisnik();
 		
 		
+		
+		
+
 		glavniIzbornik();
 
+	}
+
+	private void datumBaza() {
+		
+		Date unosHrane;
+		Calendar gc = GregorianCalendar.getInstance();
+		gc.set(Calendar.YEAR,2021);
+		gc.set(Calendar.MONTH, 7);
+		gc.set(Calendar.DAY_OF_MONTH, 13);
+		unosHrane = gc.getTime();
+		SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
+		System.out.println(df.format(unosHrane));
+		
+		try {
+			Date drugiDatum = df.parse("20. 08. 2021.");
+			Date prviDatum = df.parse("13. 08. 2021.");
+			
+			long diff = drugiDatum.getTime() - prviDatum.getTime();
+			
+			System.out.println(diff);
+			TimeUnit time = TimeUnit.DAYS;
+			long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+	        System.out.println("The difference in days is : "+diffrence);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		Date danas = gc.getTime();
+		System.out.println(danas);
+		System.out.println(df.format(danas));
+		
+		
 	}
 
 	// Dodavanje novog korisnika
 	private void bazaKorisnik() {
 		Korisnik k = new Korisnik();
 		korisnik.add(k);
-		
-		
 
-		k.setNadimak (Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
+		k.setNadimak(Ulaz.ucitajString("Odaberite nadimak", "Nadimak koji ste izabrali nije moguće izabrati."));
 		k.setEmail(
 				Ulaz.ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu.",
 						"Neispravan format"));
@@ -508,7 +550,7 @@ public class Start {
 				System.out.println((i + 1) + ". " + h.getImeHrane());
 			}
 		}
-		// izbornikHrane();
+
 	}
 
 	private void dnevnikIzbornik() {
@@ -598,25 +640,45 @@ public class Start {
 	private PotrosnjaKalorija potrosnjaKalorijaPostaviVrijednosti(PotrosnjaKalorija pk) {
 		pregledBazeAktivnostiZaDnevnik();
 		System.out.println();
-		pk.setDatum(Ulaz.ucitajDatum("Unesite datum kad ste konzumirali hranu."));
-		pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
-				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
-		System.out.println();
-		pk.setTrajanjeAktivnosti(
-				Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
+
+		// pk.setDatum(Ulaz.ucitajDatum("Unesite datum kad ste napravili aktivnost."));
+
+		while (true) {
+			pregledBazeAktivnostiZaDnevnik();
+			pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
+					"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+			System.out.println();
+			pk.setTrajanjeAktivnosti(
+					Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
+			System.out.println("Dali želite unijeti još aktivnosti?");
+			
+			if (Ulaz.scanner.nextLine().trim().toLowerCase().equals("da")) {
+				continue;
+			}
+			break;
+		}
 
 		return pk;
 	}
 
 	// Unos kalorija za dnevnik
 	private UnosKalorija unosKalorijaPostaviVrijednosti(UnosKalorija uk) {
-		pregledBazeHraneZaDnevnik();
 
-		uk.setDatum(Ulaz.ucitajDatum("Unesite datum kada ste napravili aktivnost"));
-		uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
-				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
-		uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
-				"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
+		// uk.setDatum(Ulaz.ucitajDatum("Unesite datum kada ste konzumirali hranu"));
+		while (true) {
+			pregledBazeHraneZaDnevnik();
+			System.out.println();
+			uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
+					"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+			uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
+					"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
+			System.out.println("Dali želite unijeti još hrane?");
+			if (Ulaz.scanner.nextLine().trim().toLowerCase().equals("da")) {
+				continue;
+			}
+			break;
+		}
+
 		return uk;
 	}
 
@@ -632,8 +694,6 @@ public class Start {
 		System.out.println(naslov);
 		System.out.println("-------------------");
 
-		
-		
 		if (unosKcal.isEmpty()) {
 			System.out.println("Trenutno nema unosa hrane na Vašem računu");
 		} else {
@@ -645,29 +705,12 @@ public class Start {
 
 				// Hrana koja je unesena
 				uk = unosKcal.get(i);
-				
-				System.out.println("Datum 1" + uk.getDatum());
-				
-				if(uk.getDatum().compareTo(uk.getDatum())==0) {
-					System.out.println("Print 1");
-					System.out.println(
-							uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
-									+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
-									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
-									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
-					
-				}else {
-					System.out.println("Print 2");
-					System.out.println(
-							uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
-									+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
-									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
-									+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
-					
-					
-				}
 
-
+				System.out.println(
+						uk.getHrana().getImeHrane() + " " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije()
+								+ " kcal, " + (uk.getKolicinaHrane() / 100) * uk.getHrana().getProteini() + " proteina,"
+								+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getUgljikohidrati() + " ugljikohidrata,"
+								+ (uk.getKolicinaHrane() / 100) * uk.getHrana().getMasti() + " masti. ");
 
 			}
 
@@ -716,49 +759,34 @@ public class Start {
 
 				System.out.println(basicMetablicRate);
 
-				
 			}
 			int kolikoJeDosadUnesenoKalorija = 0;
 			for (UnosKalorija uk : unosKcal) {
 				kolikoJeDosadUnesenoKalorija += (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije();
 			}
-			
-			//Koliko je dosad unio kalorija kroz hranu
+
+			// Koliko je dosad unio kalorija kroz hranu
 			System.out.println("Dosad ste unijeli: " + kolikoJeDosadUnesenoKalorija + " kcal.");
-			
+
 			int kolikoJeDosadPotrosenoKalorija = 0;
 			for (PotrosnjaKalorija pk : potrosnjaKcal) {
-				kolikoJeDosadPotrosenoKalorija += (pk.getTrajanjeAktivnosti()/100)*pk.getAktivnosti().getPotroseneKalorijePoSatu();
+				kolikoJeDosadPotrosenoKalorija += (pk.getTrajanjeAktivnosti() / 100)
+						* pk.getAktivnosti().getPotroseneKalorijePoSatu();
 			}
-			
-			//Koliko je dosad potrošio kalorija kroz aktivnosti
+
+			// Koliko je dosad potrošio kalorija kroz aktivnosti
 			System.out.println("Dosad ste potrošili: " + kolikoJeDosadPotrosenoKalorija + " kcal.");
-			
-			int razlikaIzmeduUnesenihKcalIPotrosenihKcal= kolikoJeDosadUnesenoKalorija - kolikoJeDosadPotrosenoKalorija;
-			
-			// Koliko je korisniku ostalo kalorija u dnevnoj prehrani. Ako pojede više neće smršaviti.
+
+			int razlikaIzmeduUnesenihKcalIPotrosenihKcal = basicMetablicRate + kolikoJeDosadPotrosenoKalorija
+					- kolikoJeDosadUnesenoKalorija;
+
+			// Koliko je korisniku ostalo kalorija u dnevnoj prehrani. Ako pojede više neće
+			// smršaviti.
 			System.out.println("Danas Vam je ostalo još: " + razlikaIzmeduUnesenihKcalIPotrosenihKcal + " kcal");
-			
 
 		}
 
 	}
-
-	/*
-	 * private void izbornikDatuma() { LocalDate danas = LocalDate.now(); String
-	 * formatiraniDanas = danas.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-	 * System.out.println(formatiraniDanas);
-	 * 
-	 * LocalDate jucer = danas.minusDays(1); String formatiraniJucer =
-	 * jucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-	 * System.out.println(formatiraniJucer);
-	 * 
-	 * LocalDate prekjucer = danas.minusDays(2); String formatiraniPrekjucer =
-	 * prekjucer.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-	 * System.out.println(formatiraniPrekjucer);
-	 * 
-	 * }
-	 */
 
 	public static void main(String[] args) {
 

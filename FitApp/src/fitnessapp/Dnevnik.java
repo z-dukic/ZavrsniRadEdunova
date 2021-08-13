@@ -44,4 +44,6 @@ public class Dnevnik {
 		this.datum = datum;
 	}
 
+	
+	
 }

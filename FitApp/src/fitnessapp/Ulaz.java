@@ -101,6 +101,7 @@ public class Ulaz {
 				return sdf.parse(scanner.nextLine());
 			} catch (Exception e) {
 				System.out.println("Ne ispravan format datuma. " + "Primjer unosa: " + sdf.format(new Date()));
+				
 			}
 		}
 	}
