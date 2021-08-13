@@ -21,11 +21,9 @@ public class Start {
 	private List<Dnevnik> datumDnevnika;
 	private List<UnosKalorija> unosKcal;
 	private List<PotrosnjaKalorija> potrosnjaKcal;
-	
-
 
 	public Start() {
-		datumBaza();
+
 		System.out.println(
 				" __          __  _                            _          ______ _ _                          \r\n"
 						+ " \\ \\        / / | |                          | |        |  ____(_) |       /\\                \r\n"
@@ -45,7 +43,6 @@ public class Start {
 		bazaAktivnosti();
 
 		datumDnevnika = new ArrayList<Dnevnik>();
-		datumBaza();
 
 		unosKcal = new ArrayList<UnosKalorija>();
 
@@ -53,48 +50,9 @@ public class Start {
 
 		korisnik = new ArrayList<Korisnik>();
 		bazaKorisnik();
-		
-		
-		
-		
 
 		glavniIzbornik();
 
-	}
-
-	private void datumBaza() {
-		
-		Date unosHrane;
-		Calendar gc = GregorianCalendar.getInstance();
-		gc.set(Calendar.YEAR,2021);
-		gc.set(Calendar.MONTH, 7);
-		gc.set(Calendar.DAY_OF_MONTH, 13);
-		unosHrane = gc.getTime();
-		SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
-		System.out.println(df.format(unosHrane));
-		
-		try {
-			Date drugiDatum = df.parse("20. 08. 2021.");
-			Date prviDatum = df.parse("13. 08. 2021.");
-			
-			long diff = drugiDatum.getTime() - prviDatum.getTime();
-			
-			System.out.println(diff);
-			TimeUnit time = TimeUnit.DAYS;
-			long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-	        System.out.println("The difference in days is : "+diffrence);
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		Date danas = gc.getTime();
-		System.out.println(danas);
-		System.out.println(df.format(danas));
-		
-		
 	}
 
 	// Dodavanje novog korisnika
@@ -318,30 +276,36 @@ public class Start {
 	private void korisnikIzbornik() {
 		System.out.println("---------------");
 		System.out.println("Postavke korisnika");
-		System.out.println("1. Pregled postavke korisnika");
-		System.out.println("2. Unos postavki korisnika");
-		System.out.println("3. Brisanje postavki korisnika");
-		System.out.println("4. Povratak na glavni izbornik");
+		System.out.println("1. Pregled Vaših postavki");
+		System.out.println("2. Promjena podataka korisnika");
+		System.out.println("3. Povratak na glavni izbornik");
+
 		KorisnikUcitajAkciju();
 	}
 
 	private void KorisnikUcitajAkciju() {
 
-		switch (Ulaz.ucitajInt("Odaberite akciju od 1 do 4", "Pogrešan unos. Možete izabrati samo od 1 do 4", 1, 4)) {
+		switch (Ulaz.ucitajInt("Odaberite akciju od 1 do 3", "Pogrešan unos. Možete izabrati samo od 1 do 4", 1, 3)) {
 		case 1 -> {
 			pregledKorisnika();
 			korisnikIzbornik();
 		}
-		case 2 -> glavniIzbornik(); // korisnikUnosRacuna();
-		case 3 -> brisanjePostavkiKorisnika();
-		case 4 -> glavniIzbornik();
+		case 2 -> promjenaPodatkaKorisnika();
+		case 3 -> glavniIzbornik();
+
 		}
 
+	}
+
+	private void promjenaPodatkaKorisnika() {
+		korisnik.remove(0);
+		bazaKorisnik();
 	}
 
 	// Pregled svih računa
 	private void pregledKorisnika() {
 		pristupRacunuStavke("Pregled svih računa");
+		korisnikIzbornik();
 	}
 
 	private void pristupRacunuStavke(String naslov) {
@@ -350,45 +314,23 @@ public class Start {
 		if (korisnik.isEmpty()) {
 			System.out.println("Nema unesenih korisnika");
 		} else {
+			System.out.println("Ovo su Vaši podaci.");
 			Korisnik k;
 			for (int i = 0; i < korisnik.size(); i++) {
 				k = korisnik.get(i);
-				System.out.println((i + 1) + "." + k.getNadimak());
+				System.out.println("Vaš nadimak: " + k.getNadimak());
+				System.out.println("Imate " + k.getDob() + " godina ");
+				System.out.println("Vaš e-mail je: " + k.getEmail());
+				System.out.println("Vaša visina je: " + k.getVisina() + "cm.");
+				System.out.println("Trenutačna težina je: " + k.getTezina() + "kg.");
+				System.out.println("Vaša željena težina je: " + k.getZeljenaTezina() + "kg.");
+				System.out.println();
 			}
 		}
 
 	}
 
-	private void brisanjePostavkiKorisnika() {
-		// Pristup racunu ako je imao, ali izgubio
 
-	}
-
-	/*
-	 * private void korisnikUnosRacuna() { Korisnik k = new Korisnik(); k =
-	 * kreirajRacun(k); korisnik.add(k); korisnikIzbornik();
-	 * 
-	 * }
-	 */
-	/*
-	 * private Korisnik kreirajRacun(Korisnik k) {
-	 * k.setNadimak(Ulaz.ucitajString("Odaberite nadimak",
-	 * "Nadimak koji ste izabrali nije moguće izabrati."));
-	 * 
-	 * k.setEmail( Ulaz.
-	 * ucitajString("Unesite svoj email. Ukoliko unesete krivi email nećete moći pristupi svom računu."
-	 * , "Neispravan format"));
-	 * k.setDob(Ulaz.ucitajInt("Unesite koliko imate godina", "Neispravan unos", 16,
-	 * 99)); k.setSpol(Ulaz.ucitajSpol("Unesite spol. (M za muško, F za žensko)",
-	 * "Možete samo unijeti M za muško i F za žensko"));
-	 * k.setVisina(Ulaz.ucitajInt("Unesite svoju visinu u centimetrima",
-	 * "Neispravan unos. Molimo unosite svoju visinu u centimetrima", 0, 220));
-	 * k.setTezina(Ulaz.ucitajInt("Unesite svoju težinu u kilogramima",
-	 * "Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
-	 * return k;
-	 * 
-	 * }
-	 */
 
 	// Izbornik aktivnosti gdje se mogu pregledati aktivnosti, dodati nove, obrisati
 	// stare itd.
@@ -643,20 +585,13 @@ public class Start {
 
 		// pk.setDatum(Ulaz.ucitajDatum("Unesite datum kad ste napravili aktivnost."));
 
-		while (true) {
+
 			pregledBazeAktivnostiZaDnevnik();
 			pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
 					"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
 			System.out.println();
 			pk.setTrajanjeAktivnosti(
 					Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
-			System.out.println("Dali želite unijeti još aktivnosti?");
-			
-			if (Ulaz.scanner.nextLine().trim().toLowerCase().equals("da")) {
-				continue;
-			}
-			break;
-		}
 
 		return pk;
 	}
@@ -665,19 +600,16 @@ public class Start {
 	private UnosKalorija unosKalorijaPostaviVrijednosti(UnosKalorija uk) {
 
 		// uk.setDatum(Ulaz.ucitajDatum("Unesite datum kada ste konzumirali hranu"));
-		while (true) {
+
 			pregledBazeHraneZaDnevnik();
 			System.out.println();
 			uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
 					"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
 			uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
 					"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
-			System.out.println("Dali želite unijeti još hrane?");
-			if (Ulaz.scanner.nextLine().trim().toLowerCase().equals("da")) {
-				continue;
-			}
-			break;
-		}
+			System.out.println("Dali želite unijeti još hrane? (Unesite DA ako želite unijeti još hrane, unesite NE ako ne želite više unositi hranu)");
+
+		
 
 		return uk;
 	}
