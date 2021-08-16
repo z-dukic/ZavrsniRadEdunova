@@ -2,8 +2,10 @@ package fitnessapp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -13,12 +15,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
-
-
-
 public class Ulaz {
 
+	HashMap<String, String> znanje = new HashMap<String, String>();
 	public static Scanner scanner = new Scanner(System.in);
 	
 
@@ -101,30 +100,29 @@ public class Ulaz {
 				return sdf.parse(scanner.nextLine());
 			} catch (Exception e) {
 				System.out.println("Ne ispravan format datuma. " + "Primjer unosa: " + sdf.format(new Date()));
-				
+
 			}
 		}
 	}
-	
-	
-	final String senderEmail = "perop8406@gmail.com"; //change email address
-	final String senderPassword = "Peromajstor69."; //change password
+
+	final String senderEmail = "perop8406@gmail.com"; // change email address
+	final String senderPassword = "Peromajstor69."; // change password
 	final String emailSMTPserver = "smtp.gmail.com";
 	final String emailServerPort = "465";
 	String receiverEmail = null;
 	static String emailSubject;
 	static String emailBody;
-	
+
 	public Ulaz(String receiverEmail, String subject, String body) {
-		//receiver email
+		// receiver email
 		this.receiverEmail = receiverEmail;
-		//subject
+		// subject
 		this.emailSubject = subject;
-		//body
+		// body
 		this.emailBody = body;
-		
+
 		Properties props = new Properties();
-		props.put("mail.smtp.user",senderEmail);
+		props.put("mail.smtp.user", senderEmail);
 		props.put("mail.smtp.host", emailSMTPserver);
 		props.put("mail.smtp.port", emailServerPort);
 		props.put("mail.smtp.starttls.enable", "true");
@@ -133,32 +131,58 @@ public class Ulaz {
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.socketFactory.fallback", "false");
 		SecurityManager security = System.getSecurityManager();
-		
+
 		try {
 			Authenticator auth = new SMTPAuthenticator();
 			Session session = Session.getInstance(props, auth);
 			MimeMessage msg = new MimeMessage(session);
 			msg.setText(emailBody);
-			//System.out.println(emailBody);
+			// System.out.println(emailBody);
 			msg.setSubject(emailSubject);
 			msg.setFrom(new InternetAddress(senderEmail));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
 			Transport.send(msg);
 			System.out.println("Message sent successfully");
 		}
-		
+
 		catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 	}
-	
+
 	public class SMTPAuthenticator extends javax.mail.Authenticator {
 		public PasswordAuthentication getPasswordAuthentication() {
 			return new PasswordAuthentication(senderEmail, senderPassword);
 		}
 	}
-	
-	//Ulaz send = new Ulaz("zorandjukic.os@gmail.com", "subject", "body"); //change receiver email
 
+	public Ulaz() {
+
+		//Prvi pozdrav
+		znanje.put("Bok", "Bok, kako ti mogu pomoći?");
+		znanje.put("Zdravo", "Bok, kako ti mogu pomoći?");
+		znanje.put("Ciao", "Bok, kako ti mogu pomoći?");
+		znanje.put("Dobar dan", "Bok, kako ti mogu pomoći?");
+		
+		znanje.put("hrana", "Bok, kako ti mogu pomoći?");
+		znanje.put("jabuka", "Ako nema neke vrste hrane možeš ju sam unijeti ako uneseš dva na glavnom izborniku.");
+		znanje.put("sir", "Bok, kako ti mogu pomoći?");
+		znanje.put("blabla", "Bok, kako ti mogu pomoći?");
+	}
+
+	public void odgovoriBota(String pitanje) {
+		Set<String> keys = znanje.keySet();
+		for (String key : keys) {
+			String lowerKey = key.toLowerCase();
+			String lowerQuestion = pitanje.toLowerCase();
+			if (lowerKey.contains(lowerQuestion)) {
+				System.out.println("Bot: " + znanje.get(key));
+
+				return;
+
+			}
+		}
+
+	}
 
 }

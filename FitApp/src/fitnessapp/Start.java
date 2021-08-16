@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class Start {
@@ -21,6 +23,7 @@ public class Start {
 	private List<Dnevnik> datumDnevnika;
 	private List<UnosKalorija> unosKcal;
 	private List<PotrosnjaKalorija> potrosnjaKcal;
+	HashMap<String, String> znanje = new HashMap<String, String>();
 
 	public Start() {
 
@@ -245,13 +248,41 @@ public class Start {
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
 
 		switch (Ulaz.ucitajInt(
-				"Ako želite znati više upišite broj 1, ako želite primiti mail sa informacijama o aplikaciji unesite broj 2, ako se želite vratiti na glavni izbornik upišite broj 3.",
-				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 3)) {
+				"Ako želite znati više upišite broj (1) \n Ako želite primiti mail sa informacijama o aplikaciji unesite broj (2)\n Ako želite kontaktirati korisničku podršku unesite (3) \n Ako se želite vratiti na glavni izbornik upišite broj (4).",
+				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 4)) {
 
 		case 1 -> ucitajLink();
 		case 2 -> devInformacije();
-		case 3 -> glavniIzbornik();
+		case 3 -> testBot();
+		case 4 -> glavniIzbornik();
 		}
+
+	}
+
+
+
+	public void testBot() {
+		Scanner scanner = new Scanner(System.in);
+		String userInput = "";
+		Ulaz chatbot = new Ulaz();
+
+		System.out.println("Pozdrav, moje ime je Botko. Kako ti mogu pomoći? Zapamti, možeš me uvijek prekinuti da uneseš kraj.");
+		while (!userInput.equalsIgnoreCase("kraj")) {
+			System.out.print("Korisnik: ");
+			userInput = scanner.nextLine().toLowerCase().trim();
+			chatbot.odgovoriBota(userInput);
+		}
+		System.out.println("-----------------");
+		glavniIzbornik();
+		scanner.close();
+
+	}
+
+	public void treningBota(String pitanje) {
+		System.out.println("Bot: Oprosti, ne razumijem pitanje. Kako sam trebao odgovoriti na tvoje pitanje?");
+		System.out.println("Korisnik: ");
+		String korisnikInput = scanner.nextLine();
+		znanje.put(pitanje, korisnikInput);
 
 	}
 
@@ -529,7 +560,6 @@ public class Start {
 	}
 
 	private void pregledStatistike() {
-		
 
 		dnevnikIzbornik();
 
