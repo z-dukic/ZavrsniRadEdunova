@@ -330,8 +330,6 @@ public class Start {
 
 	}
 
-
-
 	// Izbornik aktivnosti gdje se mogu pregledati aktivnosti, dodati nove, obrisati
 	// stare itd.
 	private void izbornikAktivnosti() {
@@ -519,8 +517,13 @@ public class Start {
 	}
 
 	private void pregledStatistike() {
+		Korisnik k;
+		k = korisnik.get(0);
 
-		Ulaz send = new Ulaz("zorandjukic.os@gmail.com", "subject", "body" + aktivnosti.size());
+		Ulaz send = new Ulaz(k.getEmail(), "Hvala Vam što koristite naše usluge - FitApp team.", "Hvala Vam "
+				+ k.getNadimak()
+				+ " što koriste FitApp. Za više informacija o FitAppu posjetite https://github.com/z-dukic/ZavrsniRadEdunova. Vaš FitApp team. \n"
+				+ "Lista stvari koje planiramo implementirati. \n 1. Napraviti konzolu za administratora \n 2. Napraviti da se može unijeti više od jednog dana \n 3. Napraviti da se može unijeti više od jednog korisnika \n 4. Napraviti grafičko sučelje \n 5. Napraviti spajanje na bazu podataka");
 		// change receiver email
 
 		dnevnikIzbornik();
@@ -585,13 +588,12 @@ public class Start {
 
 		// pk.setDatum(Ulaz.ucitajDatum("Unesite datum kad ste napravili aktivnost."));
 
-
-			pregledBazeAktivnostiZaDnevnik();
-			pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
-					"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
-			System.out.println();
-			pk.setTrajanjeAktivnosti(
-					Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
+		pregledBazeAktivnostiZaDnevnik();
+		pk.setAktivnosti(aktivnosti.get(Ulaz.ucitajInt("Odaberite aktivnost koju ste napravili",
+				"Ne ispravan unos. Pokušajte ponovo.", 1, aktivnosti.size()) - 1));
+		System.out.println();
+		pk.setTrajanjeAktivnosti(
+				Ulaz.ucitajInt("Unesite trajanje aktivnosti", "Aktivnost ne može biti duža od 1h", 0, 60));
 
 		return pk;
 	}
@@ -601,15 +603,14 @@ public class Start {
 
 		// uk.setDatum(Ulaz.ucitajDatum("Unesite datum kada ste konzumirali hranu"));
 
-			pregledBazeHraneZaDnevnik();
-			System.out.println();
-			uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
-					"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
-			uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
-					"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
-			System.out.println("Dali želite unijeti još hrane? (Unesite DA ako želite unijeti još hrane, unesite NE ako ne želite više unositi hranu)");
-
-		
+		pregledBazeHraneZaDnevnik();
+		System.out.println();
+		uk.setHrana(hrana.get(Ulaz.ucitajInt("Odaberite hranu koju ste konzumirali",
+				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
+		uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
+				"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
+		System.out.println(
+				"Dali želite unijeti još hrane? (Unesite DA ako želite unijeti još hrane, unesite NE ako ne želite više unositi hranu)");
 
 		return uk;
 	}
