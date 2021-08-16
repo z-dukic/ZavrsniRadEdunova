@@ -11,6 +11,7 @@ public class Korisnik {
 	private int zeljenaTezina;
 	private int dob;
 	private boolean spol;
+	
 
 	public int getZeljenaTezina() {
 		return zeljenaTezina;

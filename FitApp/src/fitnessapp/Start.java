@@ -245,13 +245,25 @@ public class Start {
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
 
 		switch (Ulaz.ucitajInt(
-				"Ako želite znati više upišite broj 1, ako se želite vratiti na glavni izbornik upišite broj 2.",
-				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 2)) {
+				"Ako želite znati više upišite broj 1, ako želite primiti mail sa informacijama o aplikaciji unesite broj 2, ako se želite vratiti na glavni izbornik upišite broj 3.",
+				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 3)) {
 
 		case 1 -> ucitajLink();
-		case 2 -> glavniIzbornik();
+		case 2 -> devInformacije();
+		case 3 -> glavniIzbornik();
 		}
 
+	}
+
+	private void devInformacije() {
+		Korisnik k;
+		k = korisnik.get(0);
+
+		Ulaz send = new Ulaz(k.getEmail(), "Hvala Vam što koristite naše usluge - FitApp team.", "Hvala Vam "
+				+ k.getNadimak()
+				+ " što koriste FitApp. Za više informacija o FitAppu posjetite https://github.com/z-dukic/ZavrsniRadEdunova. Vaš FitApp team. \n"
+				+ "Lista stvari koje planiramo implementirati. \n 1. Napraviti konzolu za administratora \n 2. Napraviti da se može unijeti više od jednog dana \n 3. Napraviti da se može unijeti više od jednog korisnika \n 4. Napraviti grafičko sučelje \n 5. Napraviti spajanje na bazu podataka");
+		glavniIzbornik();
 	}
 
 	// Učitava link na GitHub
@@ -285,7 +297,7 @@ public class Start {
 
 	private void KorisnikUcitajAkciju() {
 
-		switch (Ulaz.ucitajInt("Odaberite akciju od 1 do 3", "Pogrešan unos. Možete izabrati samo od 1 do 4", 1, 3)) {
+		switch (Ulaz.ucitajInt("Odaberite akciju od 1 do 3", "Pogrešan unos. Možete izabrati samo od 1 do 3", 1, 3)) {
 		case 1 -> {
 			pregledKorisnika();
 			korisnikIzbornik();
@@ -517,14 +529,7 @@ public class Start {
 	}
 
 	private void pregledStatistike() {
-		Korisnik k;
-		k = korisnik.get(0);
-
-		Ulaz send = new Ulaz(k.getEmail(), "Hvala Vam što koristite naše usluge - FitApp team.", "Hvala Vam "
-				+ k.getNadimak()
-				+ " što koriste FitApp. Za više informacija o FitAppu posjetite https://github.com/z-dukic/ZavrsniRadEdunova. Vaš FitApp team. \n"
-				+ "Lista stvari koje planiramo implementirati. \n 1. Napraviti konzolu za administratora \n 2. Napraviti da se može unijeti više od jednog dana \n 3. Napraviti da se može unijeti više od jednog korisnika \n 4. Napraviti grafičko sučelje \n 5. Napraviti spajanje na bazu podataka");
-		// change receiver email
+		
 
 		dnevnikIzbornik();
 
@@ -609,8 +614,6 @@ public class Start {
 				"Ne ispravan unos. Pokušajte ponovo.", 1, hrana.size()) - 1));
 		uk.setKolicinaHrane(Ulaz.ucitajInt("Koliko ste " + uk.getHrana().getImeHrane() + " konzumirali u gramima? ",
 				"Maksimum možete unijeti 1000g tj. 1kg hrane", 0, 1000));
-		System.out.println(
-				"Dali želite unijeti još hrane? (Unesite DA ako želite unijeti još hrane, unesite NE ako ne želite više unositi hranu)");
 
 		return uk;
 	}
@@ -685,10 +688,19 @@ public class Start {
 				double bmr2;
 				double bmr1;
 
-				bmr = 88.362 + 13.397 * k.getTezina();
-				bmr1 = 4.799 * k.getVisina();
-				bmr2 = -5.677 * k.getDob();
-				basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
+				if (k.isSpol() == true) {
+					bmr = 88.362 + 13.397 * k.getTezina();
+					bmr1 = 4.799 * k.getVisina();
+					bmr2 = -5.677 * k.getDob();
+					basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
+				}
+
+				if (k.isSpol() == false) {
+					bmr = 447.593 + 9.247 * k.getTezina();
+					bmr1 = 3.098 * k.getVisina();
+					bmr2 = -4.330 * k.getDob();
+					basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
+				}
 
 				System.out.println(basicMetablicRate);
 
@@ -716,6 +728,10 @@ public class Start {
 			// Koliko je korisniku ostalo kalorija u dnevnoj prehrani. Ako pojede više neće
 			// smršaviti.
 			System.out.println("Danas Vam je ostalo još: " + razlikaIzmeduUnesenihKcalIPotrosenihKcal + " kcal");
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal < 0) {
+				System.out.println("Trenutno ste unijeli " + razlikaIzmeduUnesenihKcalIPotrosenihKcal * -1
+						+ "više od potreba Vašeg organizma. Ukoliko nastavite ovako jesti to će rezultirati povećanjem Vaše tjelesne težine.");
+			}
 
 		}
 
