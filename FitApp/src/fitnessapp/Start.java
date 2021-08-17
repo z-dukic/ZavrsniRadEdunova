@@ -242,31 +242,53 @@ public class Start {
 
 	}
 
-	// Šalje na GitHub gdje se vide podaci o FitAppu
 	private void oNamaIzbornik() {
+		System.out.println("---------------");
+		System.out.println("Help");
+		System.out.println("1. Pregled source koda");
+		System.out.println("2. Mail s zadnjim updateom aplikacije");
+		System.out.println("3. Razgovor s korisničkom službom");
+		System.out.println("4. Kontaktirajte nas preko e-maila");
+		System.out.println("5. Povratak na glavni izbornik");
+
+		oNamaUcitajAkciju();
+	}
+
+	// Šalje na GitHub gdje se vide podaci o FitAppu
+	private void oNamaUcitajAkciju() {
 
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
 
 		switch (Ulaz.ucitajInt(
-				"Ako želite znati više upišite broj (1) \n Ako želite primiti mail sa informacijama o aplikaciji unesite broj (2)\n Ako želite kontaktirati korisničku podršku unesite (3) \n Ako se želite vratiti na glavni izbornik upišite broj (4).",
+				"Izaberite koju želite akciju",
 				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 4)) {
 
 		case 1 -> ucitajLink();
 		case 2 -> devInformacije();
 		case 3 -> testBot();
-		case 4 -> glavniIzbornik();
+		case 4 -> kontaktViaEmail();
+		case 5 -> glavniIzbornik();
 		}
 
 	}
 
-
+	private void kontaktViaEmail() {
+		System.out.println("Molimo Vas da ukratko opišete problem koji Vas muči. Probat ćemo Vam odgovoriti u najkraćem mogućem roku.");
+		Ulaz send = new Ulaz("perop8406@gmail.com", "Primjedba", scanner.nextLine());
+		System.out.println("Hvala Vam na Vašem mailu. Jedan od naših tehničara će Vam se javiti u najkraćem mogućem roku.");
+		System.out.println("-----------");
+		glavniIzbornik();
+		
+		
+	}
 
 	public void testBot() {
 		Scanner scanner = new Scanner(System.in);
 		String userInput = "";
 		Ulaz chatbot = new Ulaz();
 
-		System.out.println("Pozdrav, moje ime je Botko. Kako ti mogu pomoći? Zapamti, možeš me uvijek prekinuti da uneseš kraj.");
+		System.out.println(
+				"Pozdrav, moje ime je Botko. Kako ti mogu pomoći? Zapamti, možeš me uvijek prekinuti da uneseš kraj.");
 		while (!userInput.equalsIgnoreCase("kraj")) {
 			System.out.print("Korisnik: ");
 			userInput = scanner.nextLine().toLowerCase().trim();
@@ -573,6 +595,7 @@ public class Start {
 
 		case 1 -> {
 			dnevnikStavke("Trenutno dostupno u aplikaciji");
+			System.out.println("----------------");
 			int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti",
 					"Niste unijeli cijeli broj", 1, unosKcal.size());
 			unosKcal.remove(redniBroj - 1);
@@ -582,6 +605,7 @@ public class Start {
 		case 2 -> {
 
 			dnevnikStavke("Trenutno dostupno u aplikaciji");
+			System.out.println("----------------");
 			int redniBroj = Ulaz.ucitajInt("Odaberite koju hranu ili aktivnost želite izbaciti",
 					"Niste unijeli cijeli broj", 1, potrosnjaKcal.size());
 			potrosnjaKcal.remove(redniBroj - 1);
@@ -696,7 +720,7 @@ public class Start {
 
 				System.out.println(pk.getAktivnosti().getImeAktivnosti() + " "
 						+ (pk.getTrajanjeAktivnosti() / 60) * (pk.getAktivnosti().getPotroseneKalorijePoSatu())
-						+ " - kcal ");
+						+ " kcal ");
 
 			}
 

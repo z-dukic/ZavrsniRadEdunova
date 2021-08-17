@@ -159,15 +159,27 @@ public class Ulaz {
 	public Ulaz() {
 
 		//Prvi pozdrav
-		znanje.put("Bok", "Bok, kako ti mogu pomoći?");
-		znanje.put("Zdravo", "Bok, kako ti mogu pomoći?");
-		znanje.put("Ciao", "Bok, kako ti mogu pomoći?");
-		znanje.put("Dobar dan", "Bok, kako ti mogu pomoći?");
+		znanje.put("bok", "Bok, kako ti mogu pomoći?");
+		znanje.put("zdravo", "Bok, kako ti mogu pomoći?");
+		znanje.put("ciao", "Bok, kako ti mogu pomoći?");
+		znanje.put("dobar dan", "Bok, kako ti mogu pomoći?");
 		
-		znanje.put("hrana", "Bok, kako ti mogu pomoći?");
+		znanje.put("hrana", "Hranu možeš dodati u bazu ako je nema, ako postoji možeš koristiti naše preporuke u dnevniku");
+		znanje.put("aktivnost", "Aktivnosti možeš dodati u bazu ako je nema, ako postoji možeš koristiti naše preporuke u dnevniku");
+		znanje.put("postavke", "Bok, kako ti mogu pomoći?");
+		znanje.put("korisnik", "Bok, kako ti mogu pomoći?");
+		
+		znanje.put("nova hrana", "Bok, kako ti mogu pomoći?");
 		znanje.put("jabuka", "Ako nema neke vrste hrane možeš ju sam unijeti ako uneseš dva na glavnom izborniku.");
-		znanje.put("sir", "Bok, kako ti mogu pomoći?");
-		znanje.put("blabla", "Bok, kako ti mogu pomoći?");
+		znanje.put("sir", "Sir možeš direktno dodati u dnevnik, ali ako želiš možeš i promjeniti njegove macrose u izborniku hrane");
+		znanje.put("Big Mac", "Big Mac možeš diretno dodati u dnevnik. Ukoliko želiš možeš dodati i više");
+		
+		znanje.put("nogomet", "Nogomet možeš dodati kao aktivost u dnevniku.");
+		znanje.put("trcanje", "Trcanje možeš dodati kao aktivost u dnevniku.");
+		znanje.put("hodanje", "Hodanje možeš dodati kao aktivost u dnevniku.");
+		
+		
+		
 	}
 
 	public void odgovoriBota(String pitanje) {
