@@ -2,17 +2,10 @@ package fitnessapp;
 
 import java.awt.Desktop;
 import java.net.URI;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class Start {
 
@@ -75,6 +68,7 @@ public class Start {
 				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
 		k.setZeljenaTezina(Ulaz.ucitajInt("Unesite svoju željenu težinu u kilogramima",
 				"Neispravan unos. Molimo unesite svoju kilažu u kilogramima", 0, 200));
+		System.out.println("--------------");
 
 	}
 
@@ -259,8 +253,7 @@ public class Start {
 
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
 
-		switch (Ulaz.ucitajInt(
-				"Izaberite koju želite akciju",
+		switch (Ulaz.ucitajInt("Izaberite koju želite akciju",
 				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 4)) {
 
 		case 1 -> ucitajLink();
@@ -273,13 +266,14 @@ public class Start {
 	}
 
 	private void kontaktViaEmail() {
-		System.out.println("Molimo Vas da ukratko opišete problem koji Vas muči. Probat ćemo Vam odgovoriti u najkraćem mogućem roku.");
+		System.out.println(
+				"Molimo Vas da ukratko opišete problem koji Vas muči. Probat ćemo Vam odgovoriti u najkraćem mogućem roku.");
 		Ulaz send = new Ulaz("perop8406@gmail.com", "Primjedba", scanner.nextLine());
-		System.out.println("Hvala Vam na Vašem mailu. Jedan od naših tehničara će Vam se javiti u najkraćem mogućem roku.");
+		System.out.println(
+				"Hvala Vam na Vašem mailu. Jedan od naših tehničara će Vam se javiti u najkraćem mogućem roku.");
 		System.out.println("-----------");
 		glavniIzbornik();
-		
-		
+
 	}
 
 	public void testBot() {
@@ -563,7 +557,7 @@ public class Start {
 		System.out.println("1. Pregled unesene hrane po danu");
 		System.out.println("2. Dodavanje hrane i/ili aktivnosti");
 		System.out.println("3. Brisanje hrane i/ili aktivnosti");
-		System.out.println("4. Statistika");
+		System.out.println("4. Blog");
 		System.out.println("5. Povratak na glavni izbornik");
 		akcijaDnevnikIzbornik();
 
@@ -574,16 +568,10 @@ public class Start {
 		case 1 -> dnevnikPregled();
 		case 2 -> dodavanjeHraneIliAktivnostiPoDanu();
 		case 3 -> brisanjeHraneIliAktivnostiPoDanu();
-		case 4 -> pregledStatistike();
+		case 4 -> blogRecepti();
 		case 5 -> glavniIzbornik();
 
 		}
-
-	}
-
-	private void pregledStatistike() {
-
-		dnevnikIzbornik();
 
 	}
 
@@ -642,7 +630,6 @@ public class Start {
 	}
 
 	private PotrosnjaKalorija potrosnjaKalorijaPostaviVrijednosti(PotrosnjaKalorija pk) {
-		pregledBazeAktivnostiZaDnevnik();
 		System.out.println();
 
 		// pk.setDatum(Ulaz.ucitajDatum("Unesite datum kad ste napravili aktivnost."));
@@ -784,12 +771,94 @@ public class Start {
 			System.out.println("Danas Vam je ostalo još: " + razlikaIzmeduUnesenihKcalIPotrosenihKcal + " kcal");
 			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal < 0) {
 				System.out.println("Trenutno ste unijeli " + razlikaIzmeduUnesenihKcalIPotrosenihKcal * -1
-						+ "više od potreba Vašeg organizma. Ukoliko nastavite ovako jesti to će rezultirati povećanjem Vaše tjelesne težine.");
+						+ " kcal više od potreba Vašeg organizma. Ukoliko nastavite ovako jesti to će rezultirati povećanjem Vaše tjelesne težine.");
 			}
 
 		}
 
 	}
+
+	private void blogRecepti() {
+
+		System.out.println();
+
+		Korisnik k;
+		k = korisnik.get(0);
+		double bmr;
+		double bmr2;
+		double bmr1;
+		int basicMetablicRate = 0;
+
+		if (k.isSpol() == true) {
+			bmr = 88.362 + 13.397 * k.getTezina();
+			bmr1 = 4.799 * k.getVisina();
+			bmr2 = -5.677 * k.getDob();
+			basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
+		}
+
+		if (k.isSpol() == false) {
+			bmr = 447.593 + 9.247 * k.getTezina();
+			bmr1 = 3.098 * k.getVisina();
+			bmr2 = -4.330 * k.getDob();
+			basicMetablicRate = (int) (bmr1 + bmr2 + bmr);
+		}
+
+		int kolikoJeDosadUnesenoKalorija = 0;
+		for (UnosKalorija uk : unosKcal) {
+			kolikoJeDosadUnesenoKalorija += (uk.getKolicinaHrane() / 100) * uk.getHrana().getKalorije();
+
+			int kolikoJeDosadPotrosenoKalorija = 0;
+			for (PotrosnjaKalorija pk : potrosnjaKcal) {
+				kolikoJeDosadPotrosenoKalorija += (pk.getTrajanjeAktivnosti() / 100)
+						* pk.getAktivnosti().getPotroseneKalorijePoSatu();
+			}
+			int razlikaIzmeduUnesenihKcalIPotrosenihKcal = basicMetablicRate + kolikoJeDosadPotrosenoKalorija
+					- kolikoJeDosadUnesenoKalorija;
+
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 250 ) {
+				prijedlogHrane250kcal();
+			}
+			
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 500 ) {
+				prijedlogHrane500kcal();
+			}
+			
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 750 ) {
+				prijedlogHrane750kcal();
+			}
+			
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 1000 ) {
+				prijedlogHrane1000kcal();
+			}
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal <= 0) {
+				System.out.println(
+						"Nemate više kalorija za današnji dan. Ako želite povećati broj raspoloživih kalorija možete napraviti neku aktivnost kao npr. hodanje.");
+			}
+
+		}
+		dnevnikIzbornik();
+	}
+
+	private void prijedlogHrane1000kcal() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void prijedlogHrane750kcal() {
+		
+		
+	}
+
+	private void prijedlogHrane500kcal() {
+		
+		
+	}
+
+	private void prijedlogHrane250kcal() {
+
+	}
+	
+	
 
 	public static void main(String[] args) {
 
