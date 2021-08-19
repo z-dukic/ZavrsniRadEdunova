@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Start {
@@ -781,6 +782,7 @@ public class Start {
 	private void blogRecepti() {
 
 		System.out.println();
+		System.out.println("Naš će Vam sustav predložiti jela na temelju Vaših potreba.");
 
 		Korisnik k;
 		k = korisnik.get(0);
@@ -815,19 +817,19 @@ public class Start {
 			int razlikaIzmeduUnesenihKcalIPotrosenihKcal = basicMetablicRate + kolikoJeDosadPotrosenoKalorija
 					- kolikoJeDosadUnesenoKalorija;
 
-			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 250 ) {
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 250) {
 				prijedlogHrane250kcal();
 			}
-			
-			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 500 ) {
+
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 500) {
 				prijedlogHrane500kcal();
 			}
-			
-			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 750 ) {
+
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 0 && razlikaIzmeduUnesenihKcalIPotrosenihKcal < 750) {
 				prijedlogHrane750kcal();
 			}
-			
-			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 1000 ) {
+
+			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal > 1000) {
 				prijedlogHrane1000kcal();
 			}
 			if (razlikaIzmeduUnesenihKcalIPotrosenihKcal <= 0) {
@@ -840,25 +842,108 @@ public class Start {
 	}
 
 	private void prijedlogHrane1000kcal() {
-		// TODO Auto-generated method stub
-		
+
+		int prijedlog250 = new Random().nextInt(3);
+		switch (prijedlog250) {
+		case 0 -> recept1();
+		case 1 -> recept2();
+		case 2 -> recept3();
+
+		default -> System.out.println("Error flag 1.");
+
+		}
+
 	}
 
 	private void prijedlogHrane750kcal() {
-		
-		
+
+		int prijedlog250 = new Random().nextInt(3);
+		switch (prijedlog250) {
+		case 0 -> recept1();
+		case 1 -> recept2();
+		case 2 -> recept3();
+
+		default -> System.out.println("Error flag 2.");
+
+		}
+
 	}
 
 	private void prijedlogHrane500kcal() {
-		
-		
+
+		int prijedlog250 = new Random().nextInt(3);
+		switch (prijedlog250) {
+		case 0 -> recept1();
+		case 1 -> recept2();
+		case 2 -> recept3();
+
+		default -> System.out.println("Error flag 3.");
+
+		}
 	}
 
 	private void prijedlogHrane250kcal() {
 
+		int prijedlog250 = new Random().nextInt(3);
+		switch (prijedlog250) {
+		case 0 -> recept1();
+		case 1 -> recept2();
+		case 2 -> recept3();
+
+		default -> System.out.println("Error flag 4.");
+
+		}
+
+	}
+
+	private void recept3() {
+		System.out.println("Salata od škampa");
+
+		try {
+			Desktop desktop = java.awt.Desktop.getDesktop();
+			URI oURL = new URI("https://www.bbcgoodfood.com/recipes/prawn-pink-grapefruit-noodle-salad");
+			desktop.browse(oURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ocjenaRecepta("salataOdSkampa");
+		dnevnikIzbornik();
+	}
+
+
+
+	private void recept2() {
+		try {
+			Desktop desktop = java.awt.Desktop.getDesktop();
+			URI oURL = new URI("https://www.bbcgoodfood.com/recipes/indian-chicken-protein-pots");
+			desktop.browse(oURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		dnevnikIzbornik();
+	}
+
+	private void recept1() {
+		try {
+			Desktop desktop = java.awt.Desktop.getDesktop();
+			URI oURL = new URI("https://www.bbcgoodfood.com/recipes/sweet-potato-chestnut-roast-tangy-tomato-sauce");
+			desktop.browse(oURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		dnevnikIzbornik();
 	}
 	
-	
+	private void ocjenaRecepta(String imeHrane) {
+		System.out.println("Kako bi ocijenili ovaj recept?");
+		int ocjena = scanner.nextInt();
+		int[] arr = new int[ocjena];
+		int total = 0;
+		for (int i = 0; i < arr.length; i++) {
+			total = total + arr[i];
+		}
+
+	}
 
 	public static void main(String[] args) {
 
