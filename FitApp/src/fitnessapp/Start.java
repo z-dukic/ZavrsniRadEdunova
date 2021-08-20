@@ -558,7 +558,7 @@ public class Start {
 		System.out.println("1. Pregled unesene hrane po danu");
 		System.out.println("2. Dodavanje hrane i/ili aktivnosti");
 		System.out.println("3. Brisanje hrane i/ili aktivnosti");
-		System.out.println("4. Blog");
+		System.out.println("4. Recepti");
 		System.out.println("5. Povratak na glavni izbornik");
 		akcijaDnevnikIzbornik();
 
@@ -782,7 +782,7 @@ public class Start {
 	private void blogRecepti() {
 
 		System.out.println();
-		System.out.println("Naš će Vam sustav predložiti jela na temelju Vaših potreba.");
+		System.out.println("Naš će Vam sustav predložiti jela na temelju Vaših potreba kada ih unesete.");
 
 		Korisnik k;
 		k = korisnik.get(0);
@@ -910,9 +910,8 @@ public class Start {
 		dnevnikIzbornik();
 	}
 
-
-
 	private void recept2() {
+		System.out.println("Piletina na indijski");
 		try {
 			Desktop desktop = java.awt.Desktop.getDesktop();
 			URI oURL = new URI("https://www.bbcgoodfood.com/recipes/indian-chicken-protein-pots");
@@ -920,10 +919,12 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		ocjenaRecepta("Piletina na indijski");
 		dnevnikIzbornik();
 	}
 
 	private void recept1() {
+		System.out.println("Slatki krumpir u umaku od rajčice");
 		try {
 			Desktop desktop = java.awt.Desktop.getDesktop();
 			URI oURL = new URI("https://www.bbcgoodfood.com/recipes/sweet-potato-chestnut-roast-tangy-tomato-sauce");
@@ -931,18 +932,27 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		ocjenaRecepta("Slatki krumpir u umaku od rajčice");
 		dnevnikIzbornik();
 	}
-	
-	private void ocjenaRecepta(String imeHrane) {
+
+	private int ocjenaRecepta(String imeHrane) {
 		System.out.println("Kako bi ocijenili ovaj recept?");
+
+		int ukupniZbrojOcjena = 0;
+		int brojOcjena = 0;
 		int ocjena = scanner.nextInt();
-		int[] arr = new int[ocjena];
-		int total = 0;
-		for (int i = 0; i < arr.length; i++) {
-			total = total + arr[i];
+
+		if (ocjena >= 1 && ocjena <= 5) {
+			brojOcjena += 1;
+			ukupniZbrojOcjena += ocjena;
+		} else {
+			System.out.println("Ne možete unijeti ocjenu manju od 1 i veću od 5");
 		}
 
+		System.out.println("Prosječna ocjena je: " + ukupniZbrojOcjena / brojOcjena);
+
+		return ukupniZbrojOcjena / brojOcjena;
 	}
 
 	public static void main(String[] args) {
