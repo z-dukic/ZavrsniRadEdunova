@@ -255,7 +255,7 @@ public class Start {
 		System.out.println("Program je napravio Zoran Đukić za završni rad iz tečaja Jave u Edunovi. ");
 
 		switch (Ulaz.ucitajInt("Izaberite koju želite akciju",
-				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 4)) {
+				"Neispravan unos. Možete samo odgovoriti sa brojem jedna ili dva", 1, 5)) {
 
 		case 1 -> ucitajLink();
 		case 2 -> devInformacije();
@@ -273,7 +273,7 @@ public class Start {
 		System.out.println(
 				"Hvala Vam na Vašem mailu. Jedan od naših tehničara će Vam se javiti u najkraćem mogućem roku.");
 		System.out.println("-----------");
-		glavniIzbornik();
+		oNamaIzbornik();
 
 	}
 
@@ -290,7 +290,7 @@ public class Start {
 			chatbot.odgovoriBota(userInput);
 		}
 		System.out.println("-----------------");
-		glavniIzbornik();
+		oNamaIzbornik();
 		scanner.close();
 
 	}
@@ -311,7 +311,7 @@ public class Start {
 				+ k.getNadimak()
 				+ " što koriste FitApp. Za više informacija o FitAppu posjetite https://github.com/z-dukic/ZavrsniRadEdunova. Vaš FitApp team. \n"
 				+ "Lista stvari koje planiramo implementirati. \n 1. Napraviti konzolu za administratora \n 2. Napraviti da se može unijeti više od jednog dana \n 3. Napraviti da se može unijeti više od jednog korisnika \n 4. Napraviti grafičko sučelje \n 5. Napraviti spajanje na bazu podataka");
-		glavniIzbornik();
+		oNamaIzbornik();
 	}
 
 	// Učitava link na GitHub
@@ -325,10 +325,10 @@ public class Start {
 		}
 
 		System.out.println("--------");
-		System.out.println("Vraćamo Vas na glavni izbornik");
+		System.out.println("Vraćamo Vas na izbornik");
 		System.out.println("--------");
 
-		glavniIzbornik();
+		oNamaIzbornik();
 
 	}
 
@@ -906,7 +906,7 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ocjenaRecepta("salataOdSkampa");
+		
 		dnevnikIzbornik();
 	}
 
@@ -919,7 +919,7 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ocjenaRecepta("Piletina na indijski");
+		
 		dnevnikIzbornik();
 	}
 
@@ -932,28 +932,11 @@ public class Start {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ocjenaRecepta("Slatki krumpir u umaku od rajčice");
+		
 		dnevnikIzbornik();
 	}
 
-	private int ocjenaRecepta(String imeHrane) {
-		System.out.println("Kako bi ocijenili ovaj recept?");
 
-		int ukupniZbrojOcjena = 0;
-		int brojOcjena = 0;
-		int ocjena = scanner.nextInt();
-
-		if (ocjena >= 1 && ocjena <= 5) {
-			brojOcjena += 1;
-			ukupniZbrojOcjena += ocjena;
-		} else {
-			System.out.println("Ne možete unijeti ocjenu manju od 1 i veću od 5");
-		}
-
-		System.out.println("Prosječna ocjena je: " + ukupniZbrojOcjena / brojOcjena);
-
-		return ukupniZbrojOcjena / brojOcjena;
-	}
 
 	public static void main(String[] args) {
 
