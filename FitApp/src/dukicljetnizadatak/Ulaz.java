@@ -1,4 +1,4 @@
-package fitnessapp;
+package dukicljetnizadatak;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -164,7 +164,7 @@ public class Ulaz {
 		znanje.put("ciao", "Bok, kako ti mogu pomoći?");
 		znanje.put("dobar dan", "Bok, kako ti mogu pomoći?");
 		
-		znanje.put("hrana", "Hranu možeš dodati u bazu ako je nema, ako postoji možeš koristiti naše preporuke u dnevniku");
+		znanje.put("Kako da unesem hranu?", "Hranu možeš dodati u bazu ako je nema, ako postoji možeš koristiti naše preporuke u dnevniku");
 		znanje.put("aktivnost", "Aktivnosti možeš dodati u bazu ako je nema, ako postoji možeš koristiti naše preporuke u dnevniku");
 		znanje.put("postavke", "Bok, kako ti mogu pomoći?");
 		znanje.put("korisnik", "Bok, kako ti mogu pomoći?");

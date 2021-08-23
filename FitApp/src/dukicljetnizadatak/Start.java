@@ -1,4 +1,4 @@
-package fitnessapp;
+package dukicljetnizadatak;
 
 import java.awt.Desktop;
 import java.net.URI;
@@ -216,24 +216,20 @@ public class Start {
 	// Izlaz iz aplikacije
 	private void izlazIzAplikacije() {
 
-		System.out.println("Dali želite izađi iz aplikacije? (Da/Ne)");
+		
+		String izjava;
 
-		try {
-			while (true) {
-				String izlaz = scanner.nextLine().trim().toLowerCase();
-
-				if (izlaz.equals("da")) {
-					System.out.println("Hvala Vam. Dođite opet!");
-					break;
-				} else {
-					glavniIzbornik();
-
-				}
+		
+			System.out.println("Želite li izaći iz aplikacije? (Da/Ne)");
+			izjava = scanner.nextLine();
+			if (izjava.trim().toLowerCase().equals("da")) {
+				System.out.println("Hvala Vam i dođite opet!");
 			}
-
-		} catch (Exception e) {
-
-		}
+			if (izjava.trim().toLowerCase().equals("ne")) {
+				glavniIzbornik();
+			}
+			
+		
 
 	}
 
@@ -757,7 +753,7 @@ public class Start {
 
 			int kolikoJeDosadPotrosenoKalorija = 0;
 			for (PotrosnjaKalorija pk : potrosnjaKcal) {
-				kolikoJeDosadPotrosenoKalorija += (pk.getTrajanjeAktivnosti() / 100)
+				kolikoJeDosadPotrosenoKalorija += (pk.getTrajanjeAktivnosti() / 60)
 						* pk.getAktivnosti().getPotroseneKalorijePoSatu();
 			}
 

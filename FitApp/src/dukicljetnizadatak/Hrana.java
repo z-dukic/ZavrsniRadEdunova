@@ -1,4 +1,4 @@
-package fitnessapp;
+package dukicljetnizadatak;
 
 public class Hrana {
 	private String imeHrane;

@@ -1,4 +1,4 @@
-package fitnessapp;
+package dukicljetnizadatak;
 
 import java.util.Date;
 
