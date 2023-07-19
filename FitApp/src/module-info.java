@@ -1,5 +1,3 @@
 module fitApp {
-	requires java.desktop;
-	requires java.mail;
-	
+	requires java.desktop;	
 }

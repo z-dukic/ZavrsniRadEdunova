@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class Start {
 
+
+
 	Scanner scanner = new Scanner(System.in);
 	private List<Hrana> hrana;
 	private List<Aktivnosti> aktivnosti;
